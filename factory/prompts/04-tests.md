@@ -36,6 +36,6 @@ For EACH `design/visual-plan.json` target, write a desktop and mobile serial `VI
 
 Follow the target route, role, prepare steps and meaningful ready condition. Assert horizontal overflow is absent (`scrollWidth <= innerWidth + 1`), applicable controls have accessible labels/focus, and principal actions are enabled when the state calls for one. Check loaded visible images only if present, including deliberate fallbacks/lazy loading; restore intended scroll position. Static content without images/controls is valid.
 
-Create `visual-evidence/` with `node:fs/promises` if needed. Capture full-page PNGs at `visual-evidence/desktop-<id>.png` and `visual-evidence/mobile-<id>.png` for every planned target. Use `page.screenshot({ path, fullPage: true, animations: 'disabled' })` and `testInfo.attach`. These support actual image review, not baseline approval; do not add unplanned targets.
+Create `visual-evidence/` with `node:fs/promises` if needed. Capture full-page PNGs at `visual-evidence/desktop-<id>.png` and `visual-evidence/mobile-<id>.png` for every planned target. Immediately before capture, scroll to the top and run `(document.activeElement as HTMLElement | null)?.blur()` so focus checks leave no focus ring or caret in the evidence. Use `page.screenshot({ path, fullPage: true, animations: 'disabled' })` and `testInfo.attach`. These support actual image review, not baseline approval; do not add unplanned targets.
 
 You cannot run tests while the builder works. Finish with written files and concrete contract gaps; do not claim they passed.

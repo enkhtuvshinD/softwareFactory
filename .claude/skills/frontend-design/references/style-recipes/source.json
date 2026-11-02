@@ -1,0 +1,22 @@
+{
+  "repository": "https://github.com/ConardLi/garden-skills",
+  "path": "skills/web-design-engineer/references/style-recipes",
+  "license_path": "LICENSE",
+  "ref": "main",
+  "retrieved_at": "2026-11-02T03:28:48.489278+00:00",
+  "local_adaptation": true,
+  "upstream_skill_sha256": "00633aa430281e9921c35bb181ab233879d2a21e999d605fc330258a54e26df1",
+  "upstream_files_sha256": {
+    "apple-hig.md": "94f511fabd22f65591679b7dfa101b96973f3c2060516adbecdfbb1f4f7e36cc",
+    "bloomberg-terminal.md": "1ec2e502b3f1137ae0c85f24848f8387b95bed1428fcbbdaff1e77d5d1a84b9d",
+    "dieter-rams-braun.md": "ab2eb763c711877601c1c672b9e3c3a980fe3d0512197c83e05f942941f4cdd3",
+    "headspace-meditation.md": "4940e6ee8f132b7695b719b4eb894dbeef8369294e53c9434e12e49ad8197f4a",
+    "linear.md": "06c554638918c6ebcc0ff2d9b0841fe6d6077bccbcc71051aef5ad1f7fa576be",
+    "monocle-magazine.md": "df9c7c4713dd84725fe544fb8335377ef841e9371359d133efbdbef3bc4075b2",
+    "notion-pre-ai.md": "1b85ae5aa77ee1b0a523b3557045678c022e748f6bd427248f19052d00f8cbe1",
+    "pentagram.md": "e42a40687b0b7f06ac23ecd747cfe0fa902c60e2d6b3b553ab2ab7996fa75a7f",
+    "tufte-dataink.md": "28d0503016076db52508cb1d05406939f8c765e58fe13e57806f0417b9f9bcc9",
+    "vignelli-swiss-helvetica.md": "c249bc06c32d6fa8daeee4c9e51dfb587f0a88726d6afc6679767d8e9300e203",
+    "LICENSE.txt": "1126322e2cc8d165adc4c792eeb195717de2bcc7b39be1ce77959d78e87ef685"
+  }
+}

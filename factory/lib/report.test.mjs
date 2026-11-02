@@ -152,6 +152,19 @@ test('dynamic screenshot links, current hashes and resume metadata are reported'
   assert.match(report, /\| ✅ pass \| ✅ pass \| ✅ pass \| ✅ pass \| ✅ pass \|/);
 });
 
+test('failed verification rounds repaired by the fix agent stay visible in order', (t) => {
+  const { out, put } = fixture(t);
+  assert.doesNotMatch(generateReport(out), /Self-healing verification rounds/);
+  put('logs/verify-history.jsonl', [
+    { round: 'functional-0', build: 'pass', unit: 'pass', e2e: 'fail', e2e_counts: '6 failed, 5 did not run, 10 passed' },
+    { round: 'functional-1', build: 'pass', unit: 'pass', e2e: 'pass', e2e_counts: '21 passed' },
+    { round: 'final-0', build: 'fail', unit: 'skipped', e2e: 'skipped', e2e_counts: '' },
+  ].map((item) => JSON.stringify(item)).join('\n') + '\n');
+  const report = generateReport(out);
+  assert.match(report, /## Self-healing verification rounds/);
+  assert.match(report, /\| functional-0 \| ✅ pass \| ✅ pass \| ❌ fail \| 6 failed, 5 did not run, 10 passed \|\n\| functional-1 \| ✅ pass \| ✅ pass \| ✅ pass \| 21 passed \|\n\| final-0 \| ❌ fail \| ⏭️ skipped \| ⏭️ skipped \| — \|/);
+});
+
 test('changed images and changed visual plans invalidate final evidence', (t) => {
   const { out, put, imagePaths } = fixture(t);
   put(imagePaths[0], Buffer.concat([fs.readFileSync(path.join(out, imagePaths[0])), Buffer.from('changed')]));

@@ -57,12 +57,17 @@ export function generateReport(outputDirectory) {
     try { return JSON.parse(fs.readFileSync(path.join(out, file), 'utf8')); }
     catch { return fallback; }
   };
+  const readLines = (file) => {
+    try { return fs.readFileSync(path.join(out, file), 'utf8').split('\n').filter(Boolean).map((line) => JSON.parse(line)); }
+    catch { return []; }
+  };
   const exists = (file) => {
     try { return fs.statSync(path.join(out, file)).isFile(); }
     catch { return false; }
   };
   const run = read('logs/run.json', {}) ?? {};
   const verify = read('logs/verify.json', {}) ?? {};
+  const verifyRounds = readLines('logs/verify-history.jsonl').filter((item) => typeof item?.round === 'string');
   const product = read('requirements/product.json', null);
   const acceptanceData = read('requirements/acceptance.json', []);
   const acceptance = Array.isArray(acceptanceData) ? acceptanceData.filter((item) =>
@@ -219,7 +224,15 @@ ${unrecorded.length ? caseSection('Acceptance cases with unrecorded source', unr
 | Group | Passing/recorded | Result |
 |---|---|---|
 ${extraRows.join('\n')}
+${verifyRounds.length ? `
+## Self-healing verification rounds
 
+When a round fails, the runner sends its failure logs to the fix agent and reruns every gate. Rounds are in execution order.
+
+| Round | Type-check + build | Unit tests | E2E tests | E2E counts |
+|---|---|---|---|---|
+${verifyRounds.map((item) => `| ${cell(item.round)} | ${gate(item.build)} | ${gate(item.unit)} | ${gate(item.e2e)} | ${cell(item.e2e_counts || '—')} |`).join('\n')}
+` : ''}
 ## Quality gates (verification round ${cell(verify.round ?? 'not run')})
 
 | Type-check + build | Unit tests | E2E tests | Requirements review | Visual review |

@@ -292,6 +292,9 @@ test('offline runner reviews, builds in parallel, verifies twice, and stamps fin
   for (const file of ['functional-0', 'final-0']) {
     for (const gate of ['build', 'unit', 'e2e']) assert(fs.existsSync(path.join(fixture.root, 'out/logs/verify-' + file + '.' + gate + '.log')));
   }
+  const verifyRounds = fs.readFileSync(path.join(fixture.root, 'out/logs/verify-history.jsonl'), 'utf8').trim().split('\n').map((line) => JSON.parse(line));
+  assert.deepEqual(verifyRounds.map((item) => [item.round, item.e2e]), [['functional-0', 'pass'], ['final-0', 'pass']]);
+  assert(verifyRounds.every((item) => /^\d+ passed$/.test(item.e2e_counts)), 'Each round records its Playwright counts');
   const calls = events.filter((event) => event.phase === 'command');
   assert.equal(calls.filter((event) => event.command === 'npm').length, 2);
   assert.equal(calls.filter((event) => event.command === 'npx' && event.args[0] === 'vitest').length, 2);

@@ -58,7 +58,7 @@ Stage prompts explicitly read relevant project skills from `.claude/skills/`. Th
 | `demo-data-quality` | Requirements, requirements review | Small coherent resolved seed with useful domain-specific states |
 | `vercel-react-best-practices` | Build; React-related fixes | Relevant fetching/effect/rendering rules for React/Vite |
 
-The frontend skill is adapted from [Anthropic](https://github.com/anthropics/skills/tree/main/skills/frontend-design), and React rules from [Vercel](https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices). Their original entry points and source hashes are preserved under each skill's `references/`. Read focused React rule files only when relevant; the compiled guide is not loaded by default. Local entry points retain system fonts, installed dependencies, unattended operation and the current Vite stack.
+The frontend skill is adapted from [Anthropic](https://github.com/anthropics/skills/tree/main/skills/frontend-design) with ten style recipes and the critique checklist from [ConardLi/garden-skills](https://github.com/ConardLi/garden-skills/tree/main/skills/web-design-engineer) (MIT), and React rules from [Vercel](https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices). Their original entry points and source hashes are preserved under each skill's `references/`. Read focused React rule files only when relevant; the compiled guide is not loaded by default. Local entry points retain system fonts, installed dependencies, unattended operation and the current Vite stack.
 
 The existing `a11y-visual-check` includes applicable [Vercel Web Interface Guidelines](https://github.com/vercel-labs/web-interface-guidelines/blob/main/command.md) as an offline checklist. Final image review remains read-only and does not claim code/browser measurements from a PNG. No skill adds features, changes acceptance values, grants tools or starts another model run.
 
@@ -91,9 +91,11 @@ INPUT=examples/calculator ./factory/run.sh
 INPUT=examples/crm ./factory/run.sh
 INPUT=examples/restaurant ./factory/run.sh
 INPUT=examples/portfolio ./factory/run.sh
+INPUT=examples/wheels2go-hourly ./factory/run.sh
+INPUT=examples/wheels2go-deposit ./factory/run.sh
 ```
 
-Calculator, CRM and portfolio examples provide only a brief. The restaurant example supplies menu data and acceptance IDs such as `ORDER-01` and `TOTAL1`. The existing `input/` remains the Wheels2Go challenge example; it is input data, not a built-in product assumption.
+Calculator, CRM and portfolio examples provide only a brief. The restaurant example supplies menu data and acceptance IDs such as `ORDER-01` and `TOTAL1`. The existing `input/` remains the Wheels2Go challenge example; it is input data, not a built-in product assumption. The `wheels2go-hourly` and `wheels2go-deposit` variants change its pricing rules and judge parameters while keeping the original seed, to rehearse a slightly changed brief.
 
 The output platform remains the included web-app stack and installed dependencies. Requirements for external services, credentials or capabilities beyond that environment must be recorded honestly; changing the brief does not supply those services automatically.
 
@@ -147,7 +149,7 @@ factory/
   lib/gates.mjs     requirements, test results and final evidence checks
   template/         app skeleton (Vite + React, Express, Vitest, Playwright)
 input/              current example brief + optional seed data
-examples/           brief-only calculator, CRM, portfolio; restaurant with seed
+examples/           brief-only calculator, CRM, portfolio; restaurant and Wheels2Go variants with seed
 out/<product>/      one folder per run: requirements/, design/, app/, quality/, logs/, REPORT.md
 out/latest          symlink to the most recent project
 ```

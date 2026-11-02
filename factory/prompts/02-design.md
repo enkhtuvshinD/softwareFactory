@@ -14,9 +14,9 @@ CSS has the same tokens as custom properties on `:root`, then minimal box sizing
 
 ## `design/ui-spec.md`
 
-1. **Visual direction:** a recognizable direction appropriate to this product, with explicit hierarchy, palette roles, spacing and main content/action treatment. Specify imagery only if useful; invent no factual trust/integration claims.
-2. **App shell:** actual navigation, content width and necessary roles/authentication controls. Avoid redundant dashboards, login or persona switching in an anonymous single-screen product.
-3. **Screens/states:** actual routes, purposes and principal tasks; concrete desktop 1440×900 and mobile 390×844 composition, usability down to 360px, applicable loading/empty/error/success states. Use token widths/spacing and avoid horizontal overflow.
+1. **Visual direction:** the `frontend-design` Design Read and chosen recipe, then a recognizable direction appropriate to this product, with explicit hierarchy, palette roles, spacing and main content/action treatment. Specify imagery only if useful, plus a designed fallback for missing or failing image URLs when records carry images; invent no factual trust/integration claims.
+2. **App shell:** actual navigation, content width and necessary roles/authentication controls; demo controls are compact and visually secondary. Avoid redundant dashboards, login or persona switching in an anonymous single-screen product.
+3. **Screens/states:** actual routes, purposes and principal tasks; concrete desktop 1440×900 and mobile 390×844 composition where principal content starts on the first mobile screen, usability down to 360px, applicable loading/empty/error/success states. Use token widths/spacing and avoid horizontal overflow.
 4. **Components:** only used components, with tokens, interactions and accessible labels/focus.
 5. **Binding test contract:** routes/screens/access role; every control/output used by acceptance, primary journey, edge and smoke checks; exact testids, labels, input types/options and visible formatting. Repeated entities use stable `data-id`. Explain observable errors/success, actual mutations and applicable role transitions. Do not carry previous-run domain values forward.
 6. **Visual evidence plan:** explain the targets in `visual-plan.json`, exact ready states, task and visible quality criteria.

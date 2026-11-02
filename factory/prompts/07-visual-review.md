@@ -8,6 +8,8 @@ You may write only `quality/visual-review.json` and optionally `quality/demo.md`
 
 Inspect every target against its purpose/prepared state: composition, readable hierarchy/text, clear principal content/action, applicable imagery/fallbacks, clipping/overlap, mobile navigation, overflow and understandable feedback. Demand no features absent from the brief; static/read-only content is valid. Do not claim measured contrast or keyboard behavior from an image alone.
 
+Also judge the primary target's first impression: image fallbacks designed rather than bare text boxes, principal content within the first mobile screen (top 844px), demo controls visually secondary. Record each shortfall in `limitations` with its concrete fix; it is a finding only when it breaks the user task.
+
 Write `quality/visual-review.json`:
 
 ```json

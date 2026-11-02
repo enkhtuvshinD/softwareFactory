@@ -16,7 +16,7 @@ Judge actual PNGs and distinguish visible evidence from behavior that requires c
 5. **Mobile:** no horizontal scroll; navigation collapses or wraps cleanly; tap targets about 44px tall; forms in one column; wide tables become cards or scroll inside their own container.
 6. **States:** applicable empty, loading and error states guide the user; success feedback appears near the action. Do not demand states or controls the product does not need.
 7. **Data:** resolved seed values and applicable currency/date formats are consistent; no accidental `undefined`, `NaN`, `[object Object]` or unfinished scaffold text. Preserve an explicit brief format rather than imposing a different display convention.
-8. **Images:** loaded or a deliberate fallback; consistent aspect ratio inside grids.
+8. **Images:** loaded or a designed fallback (tinted surface with initials or a glyph, not a bare text box); consistent aspect ratio inside grids.
 
 ## Code checks (polish stage only, in `src/`)
 
