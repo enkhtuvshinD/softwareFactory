@@ -17,6 +17,7 @@ All dependencies are installed. Do not add packages.
 | `shared/types.ts` | Domain entities and API request/response types shared by client and server. |
 | `shared/<topic>.ts` | Pure business/validation logic (no I/O), with `<topic>.test.ts` beside it when the brief needs unit tests. No fixed entity names or pricing module is required. |
 | `server/index.ts` | Boots Express: `GET /api/health`, `POST /api/reset`, `registerRoutes(app)`, unknown `/api/*` → 404 JSON, static `dist/` + SPA fallback. Rarely needs edits. |
+| `server/http.ts` | `HttpError`, `fail()`, session and role middleware, central error handler. |
 | `server/routes/index.ts` | `registerRoutes(app)` mounts one router per resource. |
 | `server/routes/<resource>.ts` | `express.Router()` for one resource. Thin handlers: parse the request, call the service, send status and body. |
 | `server/services/<resource>.ts` | Store reads/writes and invariants for one resource, reusing `shared/` logic. |

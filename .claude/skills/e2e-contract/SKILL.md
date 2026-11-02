@@ -27,7 +27,7 @@ Builder and QA work in parallel from `design/ui-spec.md` and never see each othe
 
 - `POST /api/reset` restores the seed exactly. Tests call it in `beforeEach` and assert a 2xx status.
 - After a mutation the UI shows the server's result without a manual reload. After a reload the same state loads from the API.
-- API errors return 4xx with `{ "error": "<message>" }`; the UI shows that message in the form's error element.
+- API errors return 4xx with `{ "error": { "code", "message", "fields"? } }`; the UI shows `message` in the form's error element and each `fields` entry in its `<field>-error`.
 
 ## Waiting
 

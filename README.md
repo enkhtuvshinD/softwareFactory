@@ -42,9 +42,27 @@ optional seed ──┴─► Requirements ─► Independent review ─► Desi
 - **Rendered evidence.** The designer selects 1–3 meaningful screens or states for this product. Each is captured at 1440×900 and 390×844, producing 2–6 PNGs. A one-screen calculator needs no artificial checkout or dashboard. A separate agent inspects final images after regression; plan, review and image hashes detect later changes.
 - **Relevant unit tests.** Products with meaningful pure logic require unit tests. Static presentation may declare `unit_tests_required: false` with a reviewed `unit_test_reason`; the report then marks unit verification not applicable. Existing unit tests always execute, even with that flag. UI acceptance and the primary read/interaction journey still run.
 - **Scoped tools.** Document agents get file tools; app agents may additionally run build, Vitest, Playwright and tsc. Stage prompts restrict writable paths. No package installs or arbitrary shell commands are allowed; remote seed image URLs can still be loaded by the browser.
-- **Project skills.** `.claude/skills/` holds on-demand knowledge that stage prompts load only when relevant: `mn-locale` (Mongolian briefs), `e2e-contract` (one shared builder/QA contract for design, build and tests), `playwright-debug` (fix stage after e2e failures), `a11y-visual-check` (polish and final image review). `demo-pitch` is manual only: run `/demo-pitch [project]` in Claude Code after a run to get `quality/pitch.md`.
+- **Project skills.** `.claude/skills/` holds on-demand knowledge that stage prompts load only when relevant: `mn-locale` (Mongolian briefs), `e2e-contract` (one shared builder/QA contract for design, build and tests), `express-api` (API contract defaults and server rules for requirements and build), `playwright-debug` (fix stage after e2e failures), `a11y-visual-check` (polish and final image review). `demo-pitch` is manual only: run `/demo-pitch [project]` in Claude Code after a run to get `quality/pitch.md`.
 - **Isolated runs.** `--setting-sources project` keeps personal Claude settings, hooks and memory out of the factory.
 - **Fast start.** The app skeleton (boilerplate only, no domain code) has dependencies preinstalled and is cloned per run in under a second.
+
+## Skill routing
+
+Stage prompts explicitly read relevant project skills from `.claude/skills/`. The runner supplies that absolute directory and allows file access to it, so loading skills does not depend on a native Skill tool or on the generated app's working directory. Existing stage write scopes and tool restrictions still apply.
+
+| Added skill | Stages | Purpose |
+|---|---|---|
+| `frontend-design` | Design, polish | Product-specific composition, typography and visible hierarchy |
+| `domain-invariants` | Requirements review, build; relevant fixes | Consistent examples and boundaries for actual business rules |
+| `ux-writing` | Design, polish | Clear, consistent labels and feedback while preserving frozen contract text |
+| `demo-data-quality` | Requirements, requirements review | Small coherent resolved seed with useful domain-specific states |
+| `vercel-react-best-practices` | Build; React-related fixes | Relevant fetching/effect/rendering rules for React/Vite |
+
+The frontend skill is adapted from [Anthropic](https://github.com/anthropics/skills/tree/main/skills/frontend-design), and React rules from [Vercel](https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices). Their original entry points and source hashes are preserved under each skill's `references/`. Read focused React rule files only when relevant; the compiled guide is not loaded by default. Local entry points retain system fonts, installed dependencies, unattended operation and the current Vite stack.
+
+The existing `a11y-visual-check` includes applicable [Vercel Web Interface Guidelines](https://github.com/vercel-labs/web-interface-guidelines/blob/main/command.md) as an offline checklist. Final image review remains read-only and does not claim code/browser measurements from a PNG. No skill adds features, changes acceptance values, grants tools or starts another model run.
+
+These skills are available to the next factory run; an already running agent keeps its existing instructions.
 
 ## Setup (once)
 

@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/anthropics/skills",
+  "path": "skills/frontend-design",
+  "ref": "main",
+  "retrieved_at": "2026-11-02T00:31:31.578507+00:00",
+  "local_adaptation": true,
+  "upstream_files_sha256": {
+    "SKILL.md": "d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3",
+    "LICENSE.txt": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+  }
+}

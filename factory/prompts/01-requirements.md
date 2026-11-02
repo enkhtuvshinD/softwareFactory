@@ -2,7 +2,9 @@
 
 Turn the current product brief into a precise specification for a builder and independent QA. Work in the output root.
 
-Read `input/brief.md` and `input/seed.json`. The seed may be `{}` when none was supplied, or an incompatible leftover from a prior example. Derive the domain from this brief; do not reuse prior roles, entities, workflows or examples.
+Read `input/brief.md` and `input/seed.json`. When the product needs a domain API, load the `express-api` skill before writing the API contract. The seed may be `{}` when none was supplied, or an incompatible leftover from a prior example. Derive the domain from this brief; do not reuse prior roles, entities, workflows or examples.
+
+Load the `product-scope` skill before writing product scope and the `demo-data-quality` skill before resolving demo data; keep their decisions within the existing requirements document and `requirements/seed.json`.
 
 ## `requirements/requirements.md`
 

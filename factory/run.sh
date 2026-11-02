@@ -89,6 +89,7 @@ agent() {
           --setting-sources project \
           --permission-mode dontAsk \
           --add-dir "$OUT" \
+          --add-dir "$ROOT/.claude/skills" \
           --append-system-prompt "$SYSTEM_PROMPT" \
           --no-session-persistence \
           --output-format stream-json --verbose \
@@ -343,6 +344,7 @@ export FACTORY_RUN_DATE="$RUN_DATE"
 trap interrupted INT TERM
 SYSTEM_PROMPT="$(prompt system)
 
+Project skills directory: $ROOT/.claude/skills
 Declared RUN_DATE: $RUN_DATE (UTC calendar date, persisted across resume).
 Deadline: $(jq -r .deadline_at "$LOGS/run.json"). Derive examples and demo data from this run date."
 [[ $(node -e 'console.log(Date.now() < Number(process.argv[1]) ? "yes" : "no")' "$DEADLINE_MS") == yes ]] || abort 'original run deadline has expired; start a fresh run'

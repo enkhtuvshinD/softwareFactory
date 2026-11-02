@@ -99,10 +99,15 @@ if (command === 'claude') {
   const stage = process.env.FACTORY_STAGE;
   const budget = Number(args[args.indexOf('--max-budget-usd') + 1]);
   if (!stage || !Number.isFinite(budget) || budget < 0.3 || !prompt.trim()) process.exit(10);
+  const systemPrompt = args[args.indexOf('--append-system-prompt') + 1];
+  const skillDirectory = systemPrompt?.match(/^Project skills directory: (.+)$/m)?.[1];
+  const allowedDirectories = args.flatMap((argument, index) => argument === '--add-dir' ? [args[index + 1]] : []);
+  if (!skillDirectory || !allowedDirectories.includes(skillDirectory) || !fs.existsSync(skillDirectory)) process.exit(18);
+  const availableSkills = fs.readdirSync(skillDirectory).filter((name) => fs.existsSync(path.join(skillDirectory, name, 'SKILL.md')));
   const { budgetUsage } = await import(path.join(root, 'factory/lib/control.mjs'));
   const run = JSON.parse(fs.readFileSync(path.join(out, 'logs/run.json'), 'utf8'));
   record({ phase: 'start', stage, budget, charged: budgetUsage(path.join(out, 'logs'), run.total_budget),
-    total: run.total_budget, runDate: process.env.FACTORY_RUN_DATE });
+    total: run.total_budget, runDate: process.env.FACTORY_RUN_DATE, availableSkills });
   if (stage === 'requirements') {
     write(path.join(out, 'requirements/requirements.md'), '# Minimal reviewed specification\n');
     write(path.join(out, 'requirements/product.json'), {
@@ -202,6 +207,7 @@ function makeFixture(t, mode = 'success', scenarioName = 'wheels', { inputSeed }
   fs.writeFileSync(path.join(root, 'scenario.json'), JSON.stringify(scenario));
   const target = path.join(root, 'factory');
   fs.mkdirSync(target, { recursive: true });
+  fs.cpSync(path.join(workspace, '.claude/skills'), path.join(root, '.claude/skills'), { recursive: true });
   fs.copyFileSync(path.join(factory, 'run.sh'), path.join(target, 'run.sh'));
   for (const directory of ['lib', 'prompts']) fs.cpSync(path.join(factory, directory), path.join(target, directory), { recursive: true });
   fs.cpSync(path.join(factory, 'template'), path.join(target, 'template'), {
@@ -250,6 +256,11 @@ test('offline runner reviews, builds in parallel, verifies twice, and stamps fin
   assert.equal(result.code, 0, result.stdout + result.stderr);
   const events = eventsFor(fixture.root);
   assert(events.length > 0 && events.every((event) => event.mock === true), 'All provider/package calls must use offline doubles');
+  for (const event of events.filter((item) => item.phase === 'start')) {
+    for (const name of ['frontend-design', 'domain-invariants', 'ux-writing', 'demo-data-quality', 'product-scope', 'vercel-react-best-practices']) {
+      assert(event.availableSkills.includes(name), `${event.stage} must be able to read the installed ${name} skill from its own working directory`);
+    }
+  }
   const stages = startedStages(events);
   assert.deepEqual(stages.slice(0, 3), ['requirements', 'review', 'design']);
   assert.deepEqual(new Set(stages.slice(3, 5)), new Set(['build', 'tests']));

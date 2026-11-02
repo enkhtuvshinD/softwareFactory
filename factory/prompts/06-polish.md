@@ -4,6 +4,8 @@ Functional verification passed. Inspect rendered evidence and make one bounded c
 
 Read `../requirements/product.json`, `../requirements/requirements.md`, `../design/ui-spec.md`, `../design/visual-plan.json`, relevant `src/`, and EVERY actual planned PNG: `visual-evidence/{desktop|mobile}-<target.id>.png`. Target count varies with the app. Read images themselves; do not infer rendered quality from CSS. Load the `a11y-visual-check` skill before reviewing them.
 
+Load `frontend-design` and `ux-writing` for bounded visual/copy improvements. Preserve contract-bound labels, testids and behavior; record any needed upstream wording change rather than renaming a tested control.
+
 Review the intended user task: hierarchy, legibility, spacing, applicable imagery, principal content/action prominence, controls, mobile navigation, overflow and feedback. Evaluate only features the product needs. Prioritize material usability improvements; add no unrequested decorative sections, workflows or roles.
 
 You may edit only `src/**`, `../design/tokens.css`, `../design/tokens.json`, and `../quality/polish.md`. Keep token JSON/design CSS/app CSS synchronized; preserve token names and behavior. Keep the existing one-component-per-file structure; extract a component rather than enlarging a page. Do not edit server/shared code, E2E, package/config files, reviewed requirements/seed/acceptance or UI/visual contracts. Report behavior failures outside scope.
