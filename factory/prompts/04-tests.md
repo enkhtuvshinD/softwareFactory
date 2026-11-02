@@ -2,7 +2,7 @@
 
 Write Playwright tests from reviewed specs while another agent builds. Work in the app; read no `src/`, `server/`, `shared/` or builder transcript. Edit only `e2e/`.
 
-Read `SKELETON.md`, `playwright.config.ts`, `../input/brief.md`, `../requirements/requirements.md`, `../requirements/product.json`, `../requirements/seed.json`, `../requirements/acceptance.json`, `../requirements/review.json`, `../design/ui-spec.md`, and `../design/visual-plan.json`. Load the `e2e-contract` skill before writing specs.
+Read `SKELETON.md`, `playwright.config.ts`, `../input/brief.md`, `../requirements/requirements.md`, `../requirements/product.json`, `../requirements/seed.json`, `../requirements/acceptance.json`, `../requirements/review.json`, `../design/ui-spec.md`, and `../design/visual-plan.json`. Apply the included `e2e-contract` skill to the specs.
 
 ## Common rules
 

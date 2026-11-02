@@ -225,6 +225,28 @@ test('unknown and unfinished agents retain allocations alongside confirmed spend
   assert.match(report, /\| unknown \| \$0.75 reserved \| unfinished \|/);
 });
 
+test('token usage, tool calls and tool errors are reported per stage with totals', (t) => {
+  const { out, put } = fixture(t);
+  put('logs/build.result.json', {
+    stage: 'build', cost_usd: 1, cost_known: true, outcome: 'success',
+    tokens: { input: 10, cache_read: 2000, cache_write: 300, output: 40 },
+    tools: { Read: 2, Write: 5 }, skills: ['express-api'],
+    tool_errors: [{ tool: 'Bash', message: 'Exit code 2 | tsc failed' }],
+  });
+  put('logs/tests.result.json', {
+    stage: 'tests', cost_usd: 0.5, cost_known: true, outcome: 'success',
+    tokens: { input: 5, cache_read: 1000, cache_write: 100, output: 20 },
+    tools: {}, skills: [], tool_errors: [],
+  });
+  put('logs/review.result.json', { stage: 'review', cost_usd: 0.1, cost_known: true, outcome: 'success' });
+  const report = generateReport(out);
+  assert.match(report, /\| build \| 10 \| 2,000 \| 300 \| 40 \| Write 5, Read 2 \| 1 \| express-api \|/);
+  assert.match(report, /\| tests \| 5 \| 1,000 \| 100 \| 20 \| none \| 0 \| — \|/);
+  assert.match(report, /\| review \| not recorded \| not recorded \| not recorded \| not recorded \| not recorded \| not recorded \| not recorded \|/);
+  assert.match(report, /\| \*\*Total\*\* \| \*\*15\*\* \| \*\*3,000\*\* \| \*\*400\*\* \| \*\*60\*\* \| \| \*\*1\*\* \| \|/);
+  assert.match(report, /- build · Bash: Exit code 2 \\\| tsc failed/);
+});
+
 test('malformed partial model artifacts stay visible without crashing the report', (t) => {
   const { out, put } = fixture(t);
   put('requirements/acceptance.json', [null, { id: 42 }, { title: 'No ID' }]);

@@ -2,9 +2,9 @@
 
 Design the current product and its binding UI test contract. Use its actual domain, primary journey and scope, including anonymous/single-screen/read-only products.
 
-Read `input/brief.md`, `requirements/requirements.md`, `requirements/product.json`, `requirements/seed.json`, `requirements/acceptance.json`, and approved `requirements/review.json`. Load the `e2e-contract` skill before writing the binding test contract.
+Read `input/brief.md`, `requirements/requirements.md`, `requirements/product.json`, `requirements/seed.json`, `requirements/acceptance.json`, and approved `requirements/review.json`. Apply the included `e2e-contract` skill to the binding test contract.
 
-Load `frontend-design` for a brief-specific visual direction and `ux-writing` before freezing labels/feedback in the UI contract. Record decisions in the existing UI spec/tokens; keep system fonts, existing packages and unattended operation.
+Apply the included `frontend-design` skill for a brief-specific visual direction and `ux-writing` before freezing labels/feedback in the UI contract. Record decisions in the existing UI spec/tokens; keep system fonts, existing packages and unattended operation.
 
 ## `design/tokens.json` and `design/tokens.css`
 

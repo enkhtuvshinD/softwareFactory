@@ -10,6 +10,10 @@ const reviewChecks = ['acceptance_preserved', 'capability_coverage', 'domain_con
 const pngSignature = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
 const cell = (value) => String(value ?? '').replace(/\x1b\[[0-9;]*m/g, '').replaceAll('|', '\\|').replace(/\s+/g, ' ').trim();
 const money = (value) => Number.isFinite(value) ? `$${value.toFixed(2)}` : 'not recorded';
+const count = (value) => Number.isFinite(value) ? value.toLocaleString('en-US') : 'not recorded';
+const toolCalls = (tools) => tools && typeof tools === 'object'
+  ? Object.entries(tools).sort((a, b) => b[1] - a[1]).map(([name, calls]) => `${name} ${calls}`).join(', ') || 'none'
+  : 'not recorded';
 const duration = (value) => {
   if (!Number.isFinite(value) || value < 0) return 'not recorded';
   const seconds = Math.round(value / 1000);
@@ -146,6 +150,13 @@ export function generateReport(outputDirectory) {
   let visualStatus = visualReview ? 'fail' : 'missing';
   try { validateVisual(out); visualStatus = 'pass'; } catch { /* Explain incomplete evidence in the report. */ }
   const totalCost = stages.reduce((sum, stage) => sum + (stage.confirmed ? stage.cost_usd : 0), 0);
+  const tokenTotal = (key) => {
+    const known = stages.filter((stage) => Number.isFinite(stage.tokens?.[key]));
+    return known.length ? known.reduce((sum, stage) => sum + stage.tokens[key], 0) : NaN;
+  };
+  const toolErrors = stages.flatMap((stage) => Array.isArray(stage.tool_errors)
+    ? stage.tool_errors.map((error) => ({ stage: stage.stage, ...error }))
+    : []);
   const unknownCosts = stages.filter((stage) => !stage.confirmed);
   let budgetCharge = NaN;
   try { budgetCharge = budgetUsage(path.join(out, 'logs'), run.total_budget); } catch { /* Partial run may not have a ledger. */ }
@@ -240,6 +251,13 @@ ${limitations.length ? limitations.map((item) => `- ${cell(item)}`).join('\n') :
 ${stages.map((stage) => `| ${cell(stage.stage)} | ${cell(stage.model ?? 'not recorded')} | ${cell(stage.num_turns ?? 'not recorded')} | ${duration(stage.duration_ms)} | ${stage.confirmed ? money(stage.cost_usd) : 'unknown'} | ${money(stage.budget_charge)}${stage.confirmed ? '' : ' reserved'} | ${cell(stage.outcome)} |`).join('\n')}
 | **Total** | | ${stages.reduce((sum, stage) => sum + (stage.num_turns ?? 0), 0)} | | **${money(totalCost)}** | **${money(budgetCharge)}** | |
 
+## Tokens and tool activity
+
+| Stage | Input | Cache read | Cache write | Output | Tool calls | Tool errors | Skills |
+|---|---|---|---|---|---|---|---|
+${stages.map((stage) => `| ${cell(stage.stage)} | ${count(stage.tokens?.input)} | ${count(stage.tokens?.cache_read)} | ${count(stage.tokens?.cache_write)} | ${count(stage.tokens?.output)} | ${cell(toolCalls(stage.tools))} | ${Array.isArray(stage.tool_errors) ? stage.tool_errors.length : 'not recorded'} | ${cell(Array.isArray(stage.skills) ? stage.skills.join(', ') || '—' : 'not recorded')} |`).join('\n')}
+| **Total** | **${count(tokenTotal('input'))}** | **${count(tokenTotal('cache_read'))}** | **${count(tokenTotal('cache_write'))}** | **${count(tokenTotal('output'))}** | | **${toolErrors.length}** | |
+${toolErrors.length ? `\nTool errors:\n\n${toolErrors.map((error) => `- ${cell(error.stage)} · ${cell(error.tool)}: ${cell(error.message)}`).join('\n')}\n` : ''}
 ## Artifacts
 
 - Requirements: [requirements/requirements.md](requirements/requirements.md), [requirements/product.json](requirements/product.json), [requirements/acceptance.json](requirements/acceptance.json)

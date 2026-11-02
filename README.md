@@ -29,7 +29,7 @@ optional seed ──┴─► Requirements ─► Independent review ─► Desi
 | 4 | Verify → Fix loop | type-check + build, actual Vitest tests, Playwright; debugger gets failing logs (max 3 rounds per phase) | every required test executed and passed; no skips or expected failures |
 | 5 | UI Polish | Inspect planned rendered images; bounded client/style changes; `quality/polish.md` | full verification runs again after changes |
 | 6 | Final Visual Reviewer | Read final desktop/mobile images; `quality/visual-review.json`, optional `quality/demo.md` | every planned PNG reviewed; no material defects; runner stamps SHA256 evidence |
-| 7 | Report | `out/REPORT.md` — provided/derived acceptance and supplemental results, reviews, evidence, confirmed/reserved costs and time | incomplete checks remain explicit |
+| 7 | Report | `out/REPORT.md` — provided/derived acceptance and supplemental results, reviews, evidence, confirmed/reserved costs and time, per-stage tokens, tool calls, tool errors and skills | incomplete checks remain explicit |
 
 ## Design choices
 

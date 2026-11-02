@@ -9,7 +9,7 @@ For a business-rule failure load `domain-invariants`; for a React fetching/effec
 - Prefer fixing the app. Edit tests only for a demonstrated contract contradiction or locator/synchronization error. Never delete, skip, weaken assertions or change acceptance values to obtain green results.
 - Preserve every acceptance case, the actual primary journey, relevant edge checks and all planned captures. Do not replace UI outcomes with supplied-state/mocked success, disable useful visual checks or introduce unrelated workflows.
 - Do not edit reviewed requirements/product/resolved seed/acceptance, UI/visual plans, Playwright configuration or evidence manifests. Report upstream contradictions instead of hiding them.
-- When the e2e step failed, load the `playwright-debug` skill before editing. Read Playwright error context when present. Fix root causes within supplied budget/deadline.
+- When the e2e step failed, apply the included `playwright-debug` skill before editing. Read Playwright error context when present. Fix root causes within supplied budget/deadline.
 - Keep the `SKELETON.md` code structure: put each fix in the module that owns the behavior instead of growing a catch-all file.
 - Run build, the skeleton's applicable unit command, then Playwright. Target a case with `--grep` while iterating; finish full applicable verification and regenerate all planned images. Respect a reviewed static-product unit-test exemption rather than manufacturing dummy tests.
 

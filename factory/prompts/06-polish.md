@@ -2,9 +2,9 @@
 
 Functional verification passed. Inspect rendered evidence and make one bounded client/style polish pass. Work in the app.
 
-Read `../requirements/product.json`, `../requirements/requirements.md`, `../design/ui-spec.md`, `../design/visual-plan.json`, relevant `src/`, and EVERY actual planned PNG: `visual-evidence/{desktop|mobile}-<target.id>.png`. Target count varies with the app. Read images themselves; do not infer rendered quality from CSS. Load the `a11y-visual-check` skill before reviewing them.
+Read `../requirements/product.json`, `../requirements/requirements.md`, `../design/ui-spec.md`, `../design/visual-plan.json`, relevant `src/`, and EVERY actual planned PNG: `visual-evidence/{desktop|mobile}-<target.id>.png`. Target count varies with the app. Read images themselves; do not infer rendered quality from CSS. Apply the included `a11y-visual-check` skill when reviewing them.
 
-Load `frontend-design` and `ux-writing` for bounded visual/copy improvements. Preserve contract-bound labels, testids and behavior; record any needed upstream wording change rather than renaming a tested control.
+Apply the included `frontend-design` and `ux-writing` skills to bounded visual/copy improvements. Preserve contract-bound labels, testids and behavior; record any needed upstream wording change rather than renaming a tested control.
 
 Review the intended user task: hierarchy, legibility, spacing, applicable imagery, principal content/action prominence, controls, mobile navigation, overflow and feedback. Evaluate only features the product needs. Prioritize material usability improvements; add no unrequested decorative sections, workflows or roles.
 

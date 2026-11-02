@@ -64,6 +64,13 @@ clock() { printf '%02d:%02d' $((SECONDS / 60)) $((SECONDS % 60)); }
 say() { printf '\033[1m[%s] ▸ %s\033[0m\n' "$(clock)" "$*"; }
 warn() { printf '\033[33m[%s] ! %s\033[0m\n' "$(clock)" "$*"; }
 prompt() { cat "$FACTORY/prompts/$1.md"; }
+skills() {
+  local name
+  for name in "$@"; do
+    printf '\n\n## Project skill: %s\n\nBase directory: %s\n\n' "$name" "$ROOT/.claude/skills/$name"
+    cat "$ROOT/.claude/skills/$name/SKILL.md"
+  done
+}
 
 limited() { node "$FACTORY/lib/limit.mjs" "$DEADLINE_MS" "$@"; }
 gate() { node "$FACTORY/lib/gates.mjs" "$1" "$OUT"; }
@@ -71,7 +78,8 @@ gate() { node "$FACTORY/lib/gates.mjs" "$1" "$OUT"; }
 agent() {
   local stage=$1 model=$2 want=$3 dir=$4 text=$5
   shift 5
-  local name budget reservation
+  local name budget reservation included
+  included=$(printf '%s\n' "$text" | sed -n 's/^## Project skill: //p' | paste -sd, -)
   [[ $(node -e 'console.log(Date.now() < Number(process.argv[1]) ? "yes" : "no")' "$DEADLINE_MS") == yes ]] || {
     warn "$stage skipped: run deadline reached"
     return 1
@@ -94,7 +102,7 @@ agent() {
           --no-session-persistence \
           --output-format stream-json --verbose \
           --allowedTools "$@") \
-    | node "$FACTORY/lib/stream.mjs" "$name" "$LOGS/$name" "$dir"
+    | node "$FACTORY/lib/stream.mjs" "$name" "$LOGS/$name" "$dir" "$included"
 }
 
 has() {
@@ -102,22 +110,22 @@ has() {
   for file in "$@"; do [[ -s "$OUT/$file" ]] || return 1; done
 }
 
-run_requirements() { agent requirements "$REQ_MODEL" "$REQ_BUDGET" "$OUT" "$(prompt 01-requirements)" "${DOC_TOOLS[@]}"; }
+run_requirements() { agent requirements "$REQ_MODEL" "$REQ_BUDGET" "$OUT" "$(prompt 01-requirements; skills express-api product-scope demo-data-quality)" "${DOC_TOOLS[@]}"; }
 gate_requirements() {
   has requirements/requirements.md requirements/product.json requirements/seed.json requirements/acceptance.json && gate acceptance
 }
 
-run_review() { agent review "$REVIEW_MODEL" "$REVIEW_BUDGET" "$OUT" "$(prompt 01-review)" "${DOC_TOOLS[@]}"; }
+run_review() { agent review "$REVIEW_MODEL" "$REVIEW_BUDGET" "$OUT" "$(prompt 01-review; skills domain-invariants demo-data-quality product-scope)" "${DOC_TOOLS[@]}"; }
 gate_review() { gate review; }
 
-run_design() { agent design "$DESIGN_MODEL" "$DESIGN_BUDGET" "$OUT" "$(prompt 02-design)" "${DOC_TOOLS[@]}"; }
+run_design() { agent design "$DESIGN_MODEL" "$DESIGN_BUDGET" "$OUT" "$(prompt 02-design; skills e2e-contract frontend-design ux-writing)" "${DOC_TOOLS[@]}"; }
 gate_design() {
   gate design
 }
 
-run_build() { agent build "$BUILD_MODEL" "$BUILD_BUDGET" "$APP" "$(prompt 03-build)" "${APP_TOOLS[@]}"; }
+run_build() { agent build "$BUILD_MODEL" "$BUILD_BUDGET" "$APP" "$(prompt 03-build; skills e2e-contract express-api domain-invariants vercel-react-best-practices)" "${APP_TOOLS[@]}"; }
 
-run_tests() { agent tests "$TESTS_MODEL" "$TESTS_BUDGET" "$APP" "$(prompt 04-tests)" "${DOC_TOOLS[@]}"; }
+run_tests() { agent tests "$TESTS_MODEL" "$TESTS_BUDGET" "$APP" "$(prompt 04-tests; skills e2e-contract)" "${DOC_TOOLS[@]}"; }
 gate_tests() {
   gate tests
 }
@@ -205,7 +213,7 @@ verify_and_fix() {
       warn "still failing after $MAX_FIX_ROUNDS fix rounds"
       return 1
     fi
-    agent fix "$FIX_MODEL" "$FIX_BUDGET" "$APP" "$(prompt 05-fix; failure_context "$phase-$round")" "${APP_TOOLS[@]}" || return 1
+    agent fix "$FIX_MODEL" "$FIX_BUDGET" "$APP" "$(prompt 05-fix; failure_context "$phase-$round"; if [[ " ${FAILED_LOGS[*]} " == *.e2e.log\ * ]]; then skills playwright-debug; fi)" "${APP_TOOLS[@]}" || return 1
     round=$((round + 1))
   done
   say "all gates green"
@@ -347,6 +355,7 @@ SYSTEM_PROMPT="$(prompt system)
 Project skills directory: $ROOT/.claude/skills
 Declared RUN_DATE: $RUN_DATE (UTC calendar date, persisted across resume).
 Deadline: $(jq -r .deadline_at "$LOGS/run.json"). Derive examples and demo data from this run date."
+SYSTEM_PROMPT=${SYSTEM_PROMPT//'<project skills directory>'/$ROOT/.claude/skills}
 [[ $(node -e 'console.log(Date.now() < Number(process.argv[1]) ? "yes" : "no")' "$DEADLINE_MS") == yes ]] || abort 'original run deadline has expired; start a fresh run'
 say "Factory run · budget \$$TOTAL_BUDGET · output $OUT"
 
@@ -370,11 +379,11 @@ fi
 mkdir -p "$OUT/quality"
 rm -f "$OUT/quality/visual-review.json" "$OUT/quality/evidence.json"
 verify_and_fix functional || abort 'functional verification failed'
-agent polish "$POLISH_MODEL" "$POLISH_BUDGET" "$APP" "$(prompt 06-polish)" "${APP_TOOLS[@]}" || abort 'visual polish incomplete'
+agent polish "$POLISH_MODEL" "$POLISH_BUDGET" "$APP" "$(prompt 06-polish; skills a11y-visual-check frontend-design ux-writing)" "${APP_TOOLS[@]}" || abort 'visual polish incomplete'
 has quality/polish.md || abort 'visual polish record missing'
 verify_and_fix final || abort 'final verification failed'
 step_visual() {
-  agent visual "$VISUAL_MODEL" "$VISUAL_BUDGET" "$OUT" "$(prompt 07-visual-review)" "${DOC_TOOLS[@]}" && gate visual
+  agent visual "$VISUAL_MODEL" "$VISUAL_BUDGET" "$OUT" "$(prompt 07-visual-review; skills a11y-visual-check)" "${DOC_TOOLS[@]}" && gate visual
 }
 step_visual || abort 'final visual review failed; see quality/visual-review.json'
 finish 0

@@ -4,9 +4,9 @@ Implement the current product from reviewed behavior and concrete design. Work i
 
 Read `SKELETON.md`, `../requirements/requirements.md`, `../requirements/product.json`, approved `../requirements/review.json`, `../design/ui-spec.md`, and `../design/visual-plan.json`. Tokens and the REVIEWED resolved seed are already copied into the app.
 
-Follow the `SKELETON.md` layout and code-structure rules: one route per page file, one component per file, a router and service per server resource, pure logic in `shared/`. Small, well-named modules beat a few large files. Load the `e2e-contract` skill before writing UI code and the `express-api` skill before writing server code.
+Follow the `SKELETON.md` layout and code-structure rules: one route per page file, one component per file, a router and service per server resource, pure logic in `shared/`. Small, well-named modules beat a few large files. Apply the included `e2e-contract` skill to UI code and the `express-api` skill to server code.
 
-Load `domain-invariants` when implementing applicable business rules and `vercel-react-best-practices` for the React client. Read only relevant rule files; Next.js-only examples and additional caching packages are outside this Vite build.
+Apply the included `domain-invariants` skill to applicable business rules and `vercel-react-best-practices` to the React client. Read only relevant rule files; Next.js-only examples and additional caching packages are outside this Vite build.
 
 Build only what this product needs:
 - Shared types for actual domain/API data, plus appropriately named helpers for relevant pure logic. Do not force particular pricing/date/state helpers into unrelated products.

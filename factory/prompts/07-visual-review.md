@@ -2,7 +2,7 @@
 
 Final regression regenerated evidence. Independently inspect the current product's actual final images. Work in the output root.
 
-Read `requirements/product.json`, `requirements/requirements.md`, `design/ui-spec.md`, `design/visual-plan.json`, and `quality/polish.md` if present. For EVERY planned target read BOTH actual PNGs with the Read tool: `app/visual-evidence/desktop-<id>.png` and `app/visual-evidence/mobile-<id>.png`. A one-target app has two images; assume no fixed screen names/count. Load the `a11y-visual-check` skill before judging them.
+Read `requirements/product.json`, `requirements/requirements.md`, `design/ui-spec.md`, `design/visual-plan.json`, and `quality/polish.md` if present. For EVERY planned target read BOTH actual PNGs with the Read tool: `app/visual-evidence/desktop-<id>.png` and `app/visual-evidence/mobile-<id>.png`. A one-target app has two images; assume no fixed screen names/count. Apply the included `a11y-visual-check` skill when judging them.
 
 You may write only `quality/visual-review.json` and optionally `quality/demo.md`. Do not edit app/tests/contracts/images/stamps or regenerate evidence. Missing/unreadable images fail review.
 

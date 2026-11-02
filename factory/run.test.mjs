@@ -103,11 +103,13 @@ if (command === 'claude') {
   const skillDirectory = systemPrompt?.match(/^Project skills directory: (.+)$/m)?.[1];
   const allowedDirectories = args.flatMap((argument, index) => argument === '--add-dir' ? [args[index + 1]] : []);
   if (!skillDirectory || !allowedDirectories.includes(skillDirectory) || !fs.existsSync(skillDirectory)) process.exit(18);
+  if (!systemPrompt.includes(skillDirectory + '/<skill-name>/SKILL.md') || systemPrompt.includes('<project skills directory>')) process.exit(18);
   const availableSkills = fs.readdirSync(skillDirectory).filter((name) => fs.existsSync(path.join(skillDirectory, name, 'SKILL.md')));
   const { budgetUsage } = await import(path.join(root, 'factory/lib/control.mjs'));
   const run = JSON.parse(fs.readFileSync(path.join(out, 'logs/run.json'), 'utf8'));
   record({ phase: 'start', stage, budget, charged: budgetUsage(path.join(out, 'logs'), run.total_budget),
-    total: run.total_budget, runDate: process.env.FACTORY_RUN_DATE, availableSkills });
+    total: run.total_budget, runDate: process.env.FACTORY_RUN_DATE, availableSkills,
+    includedSkills: prompt.split('\n').filter((line) => line.startsWith('## Project skill: ')).map((line) => line.slice('## Project skill: '.length)) });
   if (stage === 'requirements') {
     write(path.join(out, 'requirements/requirements.md'), '# Minimal reviewed specification\n');
     write(path.join(out, 'requirements/product.json'), {
@@ -261,6 +263,20 @@ test('offline runner reviews, builds in parallel, verifies twice, and stamps fin
       assert(event.availableSkills.includes(name), `${event.stage} must be able to read the installed ${name} skill from its own working directory`);
     }
   }
+  const includedSkills = {
+    requirements: ['express-api', 'product-scope', 'demo-data-quality'],
+    review: ['domain-invariants', 'demo-data-quality', 'product-scope'],
+    design: ['e2e-contract', 'frontend-design', 'ux-writing'],
+    build: ['e2e-contract', 'express-api', 'domain-invariants', 'vercel-react-best-practices'],
+    tests: ['e2e-contract'],
+    polish: ['a11y-visual-check', 'frontend-design', 'ux-writing'],
+    visual: ['a11y-visual-check'],
+  };
+  for (const [stage, names] of Object.entries(includedSkills)) {
+    assert.deepEqual(events.find((event) => event.phase === 'start' && event.stage === stage).includedSkills, names);
+    const recorded = JSON.parse(fs.readFileSync(path.join(fixture.root, 'out/logs', stage + '.result.json'), 'utf8'));
+    assert.deepEqual(recorded.skills, names, `${stage} result must record the skills included in its prompt`);
+  }
   const stages = startedStages(events);
   assert.deepEqual(stages.slice(0, 3), ['requirements', 'review', 'design']);
   assert.deepEqual(new Set(stages.slice(3, 5)), new Set(['build', 'tests']));
@@ -328,8 +344,7 @@ test('failed final build invalidates prior green results and all six pre-polish 
   const polishInput = events.find((event) => event.phase === 'polish-input');
   assert.equal(polishInput?.screenshots, 6, 'Functional verification must have produced all screenshots before polish');
   assert.equal(polishInput.hasPlaywrightResults, true);
-  assert(!startedStages(events).includes('visual'), 'Failed final verification must not reach image approval');
-  const verify = readJson(fixture.root, 'out/logs/verify.json');
+  assert(!startedStages(events).includes('visual'), 'Failed final verification must not reach image approval');  const verify = readJson(fixture.root, 'out/logs/verify.json');
   assert.equal(verify.round, 'final-0');
   assert.equal(verify.build, 'fail');
   assert.equal(verify.unit, 'skipped');

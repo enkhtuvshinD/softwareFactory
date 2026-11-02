@@ -4,7 +4,7 @@ Review the proposed specification against the ORIGINAL current brief before impl
 
 Read `input/brief.md`, `input/seed.json`, and requirements files `requirements.md`, `product.json`, `seed.json`, `acceptance.json`.
 
-Load `domain-invariants` for applicable rule consistency, `demo-data-quality` for resolved seed review and `product-scope` for scope review. Skip rule categories absent from this product; do not invent business logic for static content.
+Apply the included `domain-invariants` skill to applicable rule consistency, `demo-data-quality` to resolved seed review and `product-scope` to scope review. Skip rule categories absent from this product; do not invent business logic for static content.
 
 You may correct only those four requirements files and write `requirements/review.json`. Make one bounded correction pass, then re-review.
 
