@@ -1,0 +1,37 @@
+{
+  "targets": [
+    {
+      "id": "primary",
+      "route": "/customer/tickets",
+      "role": "customer",
+      "purpose": "Customer tracks a freshly generated walk-in ticket with position and estimated wait",
+      "ready": "At least one [data-testid=ticket-card] is visible whose [data-testid=ticket-number] matches CEN-GC-NNN, with ticket-status text Waiting and ticket-position / ticket-wait visible",
+      "prepare": [
+        "Open /customer, choose persona Emma Brown in [data-testid=persona-switcher]",
+        "Select book-branch = Central Branch, book-service = General Consultation, check book-mode-walkin",
+        "Click book-submit and wait for ticket-result",
+        "Open /customer/tickets via nav-tickets"
+      ]
+    },
+    {
+      "id": "staff-desk",
+      "route": "/staff",
+      "role": "staff",
+      "purpose": "Staff member works the queue: current customer, waiting list and action buttons",
+      "ready": "[data-testid=staff-current] visible showing a ticket number in current-ticket-number (seed: CEN-CS-001), [data-testid=btn-complete] enabled and waiting-row items listed",
+      "prepare": [
+        "Open /staff, choose persona Michael Chen in [data-testid=persona-switcher]"
+      ]
+    },
+    {
+      "id": "admin-dashboard",
+      "route": "/admin",
+      "role": "admin",
+      "purpose": "Admin reads operational statistics and branch comparison",
+      "ready": "[data-testid=stat-completed] visible with a numeric value and [data-testid=chart-branches] rendered with branch-compare-row entries for both branches",
+      "prepare": [
+        "Open /admin, choose persona Jordan Ellis in [data-testid=persona-switcher]"
+      ]
+    }
+  ]
+}

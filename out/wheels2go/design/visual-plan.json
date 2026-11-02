@@ -1,0 +1,31 @@
+{
+  "targets": [
+    {
+      "id": "catalog",
+      "route": "/",
+      "role": "renter",
+      "purpose": "Renter browses the car marketplace grid with filters",
+      "ready": "At least one [data-testid=car-card] visible and [data-testid=result-count] reads \"3 cars\"",
+      "prepare": []
+    },
+    {
+      "id": "booking",
+      "route": "/cars/car_01",
+      "role": "renter",
+      "purpose": "Renter reviews car details and the live price breakdown before requesting a booking",
+      "ready": "[data-testid=price-total] reads \"$280.00\" after dates are entered",
+      "prepare": [
+        "Fill [data-testid=booking-start] with 2026-12-01",
+        "Fill [data-testid=booking-end] with 2026-12-04"
+      ]
+    },
+    {
+      "id": "requests",
+      "route": "/owner/requests",
+      "role": "owner",
+      "purpose": "Owner reviews incoming booking requests with status badges",
+      "ready": "[data-testid=booking-card][data-id=book_301] visible with a status-badge reading \"Confirmed\"",
+      "prepare": []
+    }
+  ]
+}

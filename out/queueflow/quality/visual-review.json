@@ -1,0 +1,23 @@
+{
+  "status": "pass",
+  "reviewed": [
+    { "path": "app/visual-evidence/desktop-primary.png", "findings": [] },
+    { "path": "app/visual-evidence/mobile-primary.png", "findings": [] },
+    { "path": "app/visual-evidence/desktop-staff-desk.png", "findings": [] },
+    { "path": "app/visual-evidence/mobile-staff-desk.png", "findings": [] },
+    { "path": "app/visual-evidence/desktop-admin-dashboard.png", "findings": [] },
+    { "path": "app/visual-evidence/mobile-admin-dashboard.png", "findings": [] }
+  ],
+  "fixed": [
+    "Mobile staff desk: next-customer ticket number CEN-GC-003 now stays on one line.",
+    "Customer ticket card: Position and Est. wait are now larger and bold."
+  ],
+  "remaining": [],
+  "limitations": [
+    "Judged from images only. Contrast ratios and keyboard behavior were not measured.",
+    "Mobile navigation wraps into a multi-row header. It is readable with no overflow.",
+    "Mobile admin dashboard: the last stat tile (Avg service duration) sits alone in a half-width row. This is cosmetic only.",
+    "Call Next and the other disabled staff buttons look faded. This is intentional, and the helper text explains it.",
+    "The 5vw clamp on very narrow viewports (below 360px) was not checked, because only the 390px mobile evidence was available."
+  ]
+}

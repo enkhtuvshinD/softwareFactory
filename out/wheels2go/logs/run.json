@@ -1,0 +1,10 @@
+{
+  "started_at": "2026-11-01T13:42:48Z",
+  "total_budget": 14,
+  "run_date": "2026-11-01",
+  "max_wall_seconds": 3600,
+  "resume_count": 0,
+  "deadline_at": "2026-11-01T14:42:48.000Z",
+  "finished_at": "2026-11-01T13:51:00Z",
+  "status": "pass"
+}

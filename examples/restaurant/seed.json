@@ -1,0 +1,7 @@
+{
+  "menu_items": [
+    { "id": "wrap", "name": "Veggie Wrap", "category": "Lunch", "price": 8.5 },
+    { "id": "soup", "name": "Tomato Soup", "category": "Soup", "price": 6 }
+  ],
+  "orders": []
+}

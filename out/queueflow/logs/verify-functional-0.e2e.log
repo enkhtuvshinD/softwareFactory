@@ -1,0 +1,225 @@
+
+Running 29 tests using 1 worker
+
+  ✓   1 [chromium] › e2e/case-TR-1.spec.ts:8:1 › TR-1: Queue Ticket Generation (492ms)
+  ✓   2 [chromium] › e2e/case-TR-2.spec.ts:8:1 › TR-2: FIFO Queue Processing (961ms)
+  ✓   3 [chromium] › e2e/case-TR-3.spec.ts:8:1 › TR-3: Real-Time Status Synchronization (2.7s)
+  ✓   4 [chromium] › e2e/case-TR-4.spec.ts:8:1 › TR-4: Queue Position and Waiting Time (2.7s)
+  ✓   5 [chromium] › e2e/case-TR-5.spec.ts:14:1 › TR-5: Appointment Conflict Prevention (503ms)
+  ✓   6 [chromium] › e2e/case-TR-6.spec.ts:8:1 › TR-6: Admin Analytics (2.5s)
+  ✘   7 [chromium] › e2e/edge-cases.spec.ts:8:1 › EDGE: duplicate walk-in ticket for the same branch and service is blocked (307ms)
+  ✓   8 [chromium] › e2e/edge-cases.spec.ts:38:1 › EDGE: staff cannot call next while busy and Call Next is disabled with a reason (195ms)
+  ✓   9 [chromium] › e2e/edge-cases.spec.ts:53:1 › EDGE: role boundaries are enforced in the UI and the API (131ms)
+  ✓  10 [chromium] › e2e/journey.spec.ts:21:1 › JOURNEY: customer ticket is called, served and reflected in admin analytics (4.8s)
+  ✓  11 [chromium] › e2e/smoke.spec.ts:22:3 › SMOKE: /customer renders for its role (135ms)
+  ✓  12 [chromium] › e2e/smoke.spec.ts:22:3 › SMOKE: /customer/services renders for its role (127ms)
+  ✘  13 [chromium] › e2e/smoke.spec.ts:22:3 › SMOKE: /customer/tickets renders for its role (5.2s)
+  ✓  14 [chromium] › e2e/smoke.spec.ts:22:3 › SMOKE: /customer/history renders for its role (155ms)
+  ✘  15 [chromium] › e2e/smoke.spec.ts:22:3 › SMOKE: /staff renders for its role (5.2s)
+  ✓  16 [chromium] › e2e/smoke.spec.ts:22:3 › SMOKE: /admin renders for its role (191ms)
+  ✘  17 [chromium] › e2e/smoke.spec.ts:22:3 › SMOKE: /admin/monitor renders for its role (5.2s)
+  ✓  18 [chromium] › e2e/smoke.spec.ts:22:3 › SMOKE: /admin/branches renders for its role (157ms)
+  ✘  19 [chromium] › e2e/smoke.spec.ts:22:3 › SMOKE: /admin/services renders for its role (5.2s)
+  ✓  20 [chromium] › e2e/smoke.spec.ts:22:3 › SMOKE: /admin/staff renders for its role (156ms)
+  ✓  21 [chromium] › e2e/smoke.spec.ts:32:1 › SMOKE: /display?branchId renders now calling and up next (110ms)
+  ✓  22 [chromium] › e2e/smoke.spec.ts:41:1 › SMOKE: /display without branchId offers a branch selector (129ms)
+  ✓  23 [chromium] › e2e/smoke.spec.ts:51:1 › SMOKE: unknown route shows a not-found page (132ms)
+  ✓  24 [chromium] › e2e/visual.spec.ts:116:5 › VISUAL: desktop primary (345ms)
+  ✓  25 [chromium] › e2e/visual.spec.ts:116:5 › VISUAL: mobile primary (355ms)
+  ✓  26 [chromium] › e2e/visual.spec.ts:116:5 › VISUAL: desktop staff-desk (222ms)
+  ✓  27 [chromium] › e2e/visual.spec.ts:116:5 › VISUAL: mobile staff-desk (204ms)
+  ✓  28 [chromium] › e2e/visual.spec.ts:116:5 › VISUAL: desktop admin-dashboard (238ms)
+  ✓  29 [chromium] › e2e/visual.spec.ts:116:5 › VISUAL: mobile admin-dashboard (237ms)
+
+
+  1) [chromium] › e2e/edge-cases.spec.ts:8:1 › EDGE: duplicate walk-in ticket for the same branch and service is blocked 
+
+    Error: expect(received).toHaveLength(expected)
+
+    Expected length: 1
+    Received length: 0
+    Received array:  []
+
+      24 |     (ticket) => ticket.branchId === BRANCH.central && ticket.serviceId === SERVICE.general && ['waiting', 'called', 'serving'].includes(ticket.status),
+      25 |   );
+    > 26 |   expect(active).toHaveLength(1);
+         |                  ^
+      27 |
+      28 |   await resetStore(request);
+      29 |   const [one, two] = await Promise.all([
+        at /Users/test/Documents/hackatonZT/out/queueflow/app/e2e/edge-cases.spec.ts:26:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/edge-cases-EDGE-duplicate--d7750-anch-and-service-is-blocked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/edge-cases-EDGE-duplicate--d7750-anch-and-service-is-blocked-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/edge-cases-EDGE-duplicate--d7750-anch-and-service-is-blocked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/edge-cases-EDGE-duplicate--d7750-anch-and-service-is-blocked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › e2e/smoke.spec.ts:22:3 › SMOKE: /customer/tickets renders for its role ───────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByTestId('appointment-card').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByTestId('appointment-card').first() with timeout 5000ms
+      - waiting for getByTestId('appointment-card').first()
+
+
+      23 |     const errors = trackPageErrors(page);
+      24 |     await openAs(page, route.user, route.path);
+    > 25 |     await expect(page.getByTestId(route.ready).first()).toBeVisible();
+         |                                                         ^
+      26 |     await expect(page.getByTestId('forbidden-state')).toHaveCount(0);
+      27 |     await expect(page.getByTestId('error-state')).toHaveCount(0);
+      28 |     expect(errors).toEqual([]);
+        at /Users/test/Documents/hackatonZT/out/queueflow/app/e2e/smoke.spec.ts:25:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/smoke-SMOKE-customer-tickets-renders-for-its-role-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/smoke-SMOKE-customer-tickets-renders-for-its-role-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/smoke-SMOKE-customer-tickets-renders-for-its-role-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/smoke-SMOKE-customer-tickets-renders-for-its-role-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › e2e/smoke.spec.ts:22:3 › SMOKE: /staff renders for its role ──────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByTestId('staff-current').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByTestId('staff-current').first() with timeout 5000ms
+      - waiting for getByTestId('staff-current').first()
+
+
+      23 |     const errors = trackPageErrors(page);
+      24 |     await openAs(page, route.user, route.path);
+    > 25 |     await expect(page.getByTestId(route.ready).first()).toBeVisible();
+         |                                                         ^
+      26 |     await expect(page.getByTestId('forbidden-state')).toHaveCount(0);
+      27 |     await expect(page.getByTestId('error-state')).toHaveCount(0);
+      28 |     expect(errors).toEqual([]);
+        at /Users/test/Documents/hackatonZT/out/queueflow/app/e2e/smoke.spec.ts:25:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/smoke-SMOKE-staff-renders-for-its-role-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/smoke-SMOKE-staff-renders-for-its-role-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/smoke-SMOKE-staff-renders-for-its-role-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/smoke-SMOKE-staff-renders-for-its-role-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › e2e/smoke.spec.ts:22:3 › SMOKE: /admin/monitor renders for its role ──────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByTestId('monitor-row').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByTestId('monitor-row').first() with timeout 5000ms
+      - waiting for getByTestId('monitor-row').first()
+
+
+      23 |     const errors = trackPageErrors(page);
+      24 |     await openAs(page, route.user, route.path);
+    > 25 |     await expect(page.getByTestId(route.ready).first()).toBeVisible();
+         |                                                         ^
+      26 |     await expect(page.getByTestId('forbidden-state')).toHaveCount(0);
+      27 |     await expect(page.getByTestId('error-state')).toHaveCount(0);
+      28 |     expect(errors).toEqual([]);
+        at /Users/test/Documents/hackatonZT/out/queueflow/app/e2e/smoke.spec.ts:25:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/smoke-SMOKE-admin-monitor-renders-for-its-role-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/smoke-SMOKE-admin-monitor-renders-for-its-role-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/smoke-SMOKE-admin-monitor-renders-for-its-role-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/smoke-SMOKE-admin-monitor-renders-for-its-role-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › e2e/smoke.spec.ts:22:3 › SMOKE: /admin/services renders for its role ─────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByTestId('service-row').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByTestId('service-row').first() with timeout 5000ms
+      - waiting for getByTestId('service-row').first()
+
+
+      23 |     const errors = trackPageErrors(page);
+      24 |     await openAs(page, route.user, route.path);
+    > 25 |     await expect(page.getByTestId(route.ready).first()).toBeVisible();
+         |                                                         ^
+      26 |     await expect(page.getByTestId('forbidden-state')).toHaveCount(0);
+      27 |     await expect(page.getByTestId('error-state')).toHaveCount(0);
+      28 |     expect(errors).toEqual([]);
+        at /Users/test/Documents/hackatonZT/out/queueflow/app/e2e/smoke.spec.ts:25:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/smoke-SMOKE-admin-services-renders-for-its-role-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/smoke-SMOKE-admin-services-renders-for-its-role-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/smoke-SMOKE-admin-services-renders-for-its-role-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/smoke-SMOKE-admin-services-renders-for-its-role-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5 failed
+    [chromium] › e2e/edge-cases.spec.ts:8:1 › EDGE: duplicate walk-in ticket for the same branch and service is blocked 
+    [chromium] › e2e/smoke.spec.ts:22:3 › SMOKE: /customer/tickets renders for its role ────────────
+    [chromium] › e2e/smoke.spec.ts:22:3 › SMOKE: /staff renders for its role ───────────────────────
+    [chromium] › e2e/smoke.spec.ts:22:3 › SMOKE: /admin/monitor renders for its role ───────────────
+    [chromium] › e2e/smoke.spec.ts:22:3 › SMOKE: /admin/services renders for its role ──────────────
+  24 passed (44.5s)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report[39m
+[36m[39m

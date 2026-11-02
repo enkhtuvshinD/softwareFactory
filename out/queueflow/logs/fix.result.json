@@ -1,0 +1,13 @@
+{
+  "stage": "fix",
+  "model": "claude-sonnet-5-5",
+  "started_at": "2026-11-01T14:43:49.339Z",
+  "finished_at": "2026-11-01T14:44:43.997Z",
+  "outcome": "success",
+  "is_error": false,
+  "cost_usd": 0.1544493,
+  "cost_known": true,
+  "duration_ms": 53363,
+  "num_turns": 16,
+  "final_message": "All five failures are fixed, and the full Playwright suite now passes (29 of 29). That includes the visual captures, which were regenerated. I did not open the regenerated screenshots, so I haven't checked how they look.\n\n**Cause:** `SessionProviderBody` in `src/hooks/useSession.tsx` had an effect that wrote the current user ID to localStorage after mount. The app mounts only after the users fetch returns, which is after the test's `openAs` helper has stored the target user. If the effect ran after that, it overwrote the stored user with the default (Alex Rivera). The page then loaded as a customer instead of Emma, Michael or Jordan, so these checks failed:\n- The staff and admin routes showed \"You don't have access to this page\".\n- `/customer/tickets` showed Alex's data instead of Emma's.\n- The duplicate-ticket edge test booked as Alex, so Emma's ticket list came back empty.\n\n**Fix:** I removed that effect and the `useEffect` import it left unused. `selectUser` already saves the choice when someone switches accounts, so nothing else needed to persist it.\n\n**Changed files:** only `src/hooks/useSession.tsx`. I made no test corrections.\n\n**Checks run:** `npm run build` passed, `npx vitest run` passed (42 tests in 6 files), and `npx playwright test` passed in full.\n\n**Limitations:** I didn't re-run the earlier failing tests repeatedly to confirm the race is gone for good. The race happened in a very short window, so a clean full run is good evidence but not proof."
+}

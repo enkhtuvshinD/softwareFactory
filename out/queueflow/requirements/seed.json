@@ -1,0 +1,58 @@
+{
+  "clock": { "anchorIso": "2026-11-01T10:00:00Z" },
+  "users": [
+    { "id": "usr_201", "name": "Alex Rivera", "email": "alex.rivera@example.com", "role": "customer", "branchId": null, "counterNumber": null },
+    { "id": "usr_202", "name": "Emma Brown", "email": "emma.brown@example.com", "role": "customer", "branchId": null, "counterNumber": null },
+    { "id": "usr_203", "name": "James Miller", "email": "james.miller@example.com", "role": "customer", "branchId": null, "counterNumber": null },
+    { "id": "usr_301", "name": "Sarah Johnson", "email": "sarah.johnson@example.com", "role": "staff", "branchId": "br_central", "counterNumber": 1 },
+    { "id": "usr_302", "name": "Michael Chen", "email": "michael.chen@example.com", "role": "staff", "branchId": "br_central", "counterNumber": 2 },
+    { "id": "usr_303", "name": "David Wilson", "email": "david.wilson@example.com", "role": "staff", "branchId": "br_downtown", "counterNumber": 1 },
+    { "id": "usr_401", "name": "Jordan Ellis", "email": "jordan.ellis@example.com", "role": "admin", "branchId": null, "counterNumber": null }
+  ],
+  "branches": [
+    {
+      "id": "br_central",
+      "name": "Central Branch",
+      "code": "CEN",
+      "address": "120 Main Street, Springfield",
+      "openTime": "09:00",
+      "closeTime": "17:00",
+      "counterCount": 2,
+      "serviceIds": ["svc_general", "svc_docs", "svc_support"],
+      "isActive": true
+    },
+    {
+      "id": "br_downtown",
+      "name": "Downtown Branch",
+      "code": "DWN",
+      "address": "48 Market Avenue, Springfield",
+      "openTime": "09:00",
+      "closeTime": "17:00",
+      "counterCount": 1,
+      "serviceIds": ["svc_general", "svc_support"],
+      "isActive": true
+    }
+  ],
+  "services": [
+    { "id": "svc_general", "name": "General Consultation", "code": "GC", "description": "One-to-one consultation for general questions and account guidance.", "durationMinutes": 15, "category": "General", "isActive": true },
+    { "id": "svc_docs", "name": "Document Verification", "code": "DV", "description": "Verification of identity and supporting documents.", "durationMinutes": 10, "category": "Verification", "isActive": true },
+    { "id": "svc_support", "name": "Customer Support", "code": "CS", "description": "Help with open cases, complaints and service issues.", "durationMinutes": 20, "category": "Support", "isActive": true }
+  ],
+  "tickets": [
+    { "id": "tkt_001", "ticketNumber": "CEN-GC-001", "branchId": "br_central", "serviceId": "svc_general", "customerId": "usr_202", "customerName": "Emma Brown", "type": "walk_in", "businessDate": "2026-11-01", "sequence": 1, "status": "completed", "createdAt": "2026-11-01T09:05:00Z", "calledAt": "2026-11-01T09:10:00Z", "startedAt": "2026-11-01T09:11:00Z", "endedAt": "2026-11-01T09:24:00Z", "counterNumber": 1, "staffId": "usr_301", "appointmentId": null },
+    { "id": "tkt_002", "ticketNumber": "CEN-DV-001", "branchId": "br_central", "serviceId": "svc_docs", "customerId": "usr_203", "customerName": "James Miller", "type": "walk_in", "businessDate": "2026-11-01", "sequence": 1, "status": "completed", "createdAt": "2026-11-01T09:12:00Z", "calledAt": "2026-11-01T09:18:00Z", "startedAt": "2026-11-01T09:20:00Z", "endedAt": "2026-11-01T09:29:00Z", "counterNumber": 2, "staffId": "usr_302", "appointmentId": null },
+    { "id": "tkt_003", "ticketNumber": "CEN-GC-002", "branchId": "br_central", "serviceId": "svc_general", "customerId": null, "customerName": "Priya Nair", "type": "walk_in", "businessDate": "2026-11-01", "sequence": 2, "status": "serving", "createdAt": "2026-11-01T09:30:00Z", "calledAt": "2026-11-01T09:48:00Z", "startedAt": "2026-11-01T09:50:00Z", "endedAt": null, "counterNumber": 1, "staffId": "usr_301", "appointmentId": null },
+    { "id": "tkt_004", "ticketNumber": "CEN-CS-001", "branchId": "br_central", "serviceId": "svc_support", "customerId": null, "customerName": "Lena Ortiz", "type": "walk_in", "businessDate": "2026-11-01", "sequence": 1, "status": "serving", "createdAt": "2026-11-01T09:35:00Z", "calledAt": "2026-11-01T09:50:00Z", "startedAt": "2026-11-01T09:52:00Z", "endedAt": null, "counterNumber": 2, "staffId": "usr_302", "appointmentId": null },
+    { "id": "tkt_005", "ticketNumber": "CEN-GC-003", "branchId": "br_central", "serviceId": "svc_general", "customerId": null, "customerName": "Tom Becker", "type": "walk_in", "businessDate": "2026-11-01", "sequence": 3, "status": "waiting", "createdAt": "2026-11-01T09:40:00Z", "calledAt": null, "startedAt": null, "endedAt": null, "counterNumber": null, "staffId": null, "appointmentId": null },
+    { "id": "tkt_006", "ticketNumber": "CEN-GC-004", "branchId": "br_central", "serviceId": "svc_general", "customerId": null, "customerName": "Grace Kim", "type": "walk_in", "businessDate": "2026-11-01", "sequence": 4, "status": "cancelled", "createdAt": "2026-11-01T09:44:00Z", "calledAt": null, "startedAt": null, "endedAt": "2026-11-01T09:47:00Z", "counterNumber": null, "staffId": null, "appointmentId": null },
+    { "id": "tkt_007", "ticketNumber": "CEN-DV-002", "branchId": "br_central", "serviceId": "svc_docs", "customerId": null, "customerName": "Omar Haddad", "type": "walk_in", "businessDate": "2026-11-01", "sequence": 2, "status": "waiting", "createdAt": "2026-11-01T09:50:00Z", "calledAt": null, "startedAt": null, "endedAt": null, "counterNumber": null, "staffId": null, "appointmentId": null },
+    { "id": "tkt_008", "ticketNumber": "DWN-GC-001", "branchId": "br_downtown", "serviceId": "svc_general", "customerId": null, "customerName": "Nora Quinn", "type": "walk_in", "businessDate": "2026-11-01", "sequence": 1, "status": "completed", "createdAt": "2026-11-01T09:15:00Z", "calledAt": "2026-11-01T09:16:00Z", "startedAt": "2026-11-01T09:17:00Z", "endedAt": "2026-11-01T09:29:00Z", "counterNumber": 1, "staffId": "usr_303", "appointmentId": null },
+    { "id": "tkt_009", "ticketNumber": "DWN-CS-001", "branchId": "br_downtown", "serviceId": "svc_support", "customerId": null, "customerName": "Hiro Tanaka", "type": "walk_in", "businessDate": "2026-11-01", "sequence": 1, "status": "no_show", "createdAt": "2026-11-01T09:20:00Z", "calledAt": "2026-11-01T09:28:00Z", "startedAt": null, "endedAt": "2026-11-01T09:33:00Z", "counterNumber": 1, "staffId": "usr_303", "appointmentId": null },
+    { "id": "tkt_010", "ticketNumber": "DWN-GC-002", "branchId": "br_downtown", "serviceId": "svc_general", "customerId": null, "customerName": "Ravi Patel", "type": "walk_in", "businessDate": "2026-11-01", "sequence": 2, "status": "serving", "createdAt": "2026-11-01T09:22:00Z", "calledAt": "2026-11-01T09:50:00Z", "startedAt": "2026-11-01T09:52:00Z", "endedAt": null, "counterNumber": 1, "staffId": "usr_303", "appointmentId": null },
+    { "id": "tkt_011", "ticketNumber": "DWN-GC-003", "branchId": "br_downtown", "serviceId": "svc_general", "customerId": "usr_201", "customerName": "Alex Rivera", "type": "walk_in", "businessDate": "2026-11-01", "sequence": 3, "status": "waiting", "createdAt": "2026-11-01T09:40:00Z", "calledAt": null, "startedAt": null, "endedAt": null, "counterNumber": null, "staffId": null, "appointmentId": null }
+  ],
+  "appointments": [
+    { "id": "appt_001", "customerId": "usr_202", "branchId": "br_central", "serviceId": "svc_docs", "date": "2026-11-02", "startTime": "11:00", "endTime": "11:10", "counterNumber": 1, "staffId": "usr_301", "status": "scheduled", "ticketId": null, "createdAt": "2026-10-31T16:00:00Z" },
+    { "id": "appt_002", "customerId": "usr_203", "branchId": "br_downtown", "serviceId": "svc_support", "date": "2026-11-01", "startTime": "15:00", "endTime": "15:20", "counterNumber": 1, "staffId": "usr_303", "status": "scheduled", "ticketId": null, "createdAt": "2026-10-31T18:00:00Z" }
+  ]
+}

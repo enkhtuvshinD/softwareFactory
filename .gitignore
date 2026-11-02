@@ -1,0 +1,10 @@
+node_modules
+.DS_Store
+.env
+.factory.lock
+.runs
+factory/template/dist
+out/*/app/dist
+out/*/app/test-results
+out/*/app/playwright-report
+out/*/app/server/data/db.json

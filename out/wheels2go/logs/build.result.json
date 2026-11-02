@@ -1,0 +1,13 @@
+{
+  "stage": "build",
+  "model": "claude-sonnet-5-5",
+  "started_at": "2026-11-01T13:45:47.530Z",
+  "finished_at": "2026-11-01T13:49:34.711Z",
+  "outcome": "success",
+  "is_error": false,
+  "cost_usd": 0.6965932,
+  "cost_known": true,
+  "duration_ms": 225109,
+  "num_turns": 29,
+  "final_message": "Wheels2Go is built to the reviewed contract. `npm run build` passes and `npx vitest run` passes (21 tests). I haven't started the server, run the browser tests or looked at any screenshots. The API routes and the UI flows have only been type-checked, not exercised.\n\n**What's in place**\n- **Shared code:** `shared/types.ts` holds the domain and API types. `shared/logic.ts` holds pricing, date validation, overlap, derived completed status, filters, listing validation, earnings and formatting. Server and client both use it.\n- **Server:** every endpoint in the requirements contract is in `server/routes.ts`, with the specified error shape and role/ownership checks via `X-User-Id`. Prices are calculated on the server. Reset restores `seed.json` through the existing code.\n- **Client:** all routes in the UI spec are built, with the account switcher saved to localStorage, toasts, confirm dialogs, image fallbacks and loading/empty/error states. Test IDs follow the binding test contract, and the styling uses the design tokens.\n- **README:** run instructions and demo accounts are in `README.md`.\n\n**Unit tests:** they cover the worked pricing examples, date errors, half-open overlap, derived status, filters (including Tesla with max 90), listing validation and earnings against the seed. I didn't write tests for the routes or components.\n\n**Limitations**\n- The client uses the browser's local date for \"today\" and the server uses UTC, so they can disagree near midnight.\n- I did not check the 360px/390px layouts, the primary journey or contrast.\n- I did not read or write `e2e/`."
+}

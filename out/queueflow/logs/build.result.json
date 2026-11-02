@@ -1,0 +1,13 @@
+{
+  "stage": "build",
+  "model": "claude-sonnet-5-5",
+  "started_at": "2026-11-01T14:32:24.603Z",
+  "finished_at": "2026-11-01T14:43:01.864Z",
+  "outcome": "success",
+  "is_error": false,
+  "cost_usd": 1.9715292999999998,
+  "cost_known": true,
+  "duration_ms": 635904,
+  "num_turns": 128,
+  "final_message": "`npm run build` passes and `npx vitest run` passes (6 files, 42 tests). I never ran the app, so none of the API or UI behaviour has been exercised.\n\nI tried a one-off `tsx` script to walk the primary journey through the server services. The shell refused it, so I did not retry. The journey, the appointment conversion and the role checks therefore have no runtime verification. I did not run Playwright, and I did not read or write `e2e/` or capture any screenshots.\n\n**Built**\n- **Server:** one router and one service per resource, covering every endpoint in the requirements contract.\n  - `X-User-Id` is checked on every call: 401 for an unknown ID, 403 for the wrong role.\n  - Error responses use the `{error:{code,message,fields?}}` shape.\n  - `Cache-Control: no-store` is set on all API responses.\n  - Due appointments convert to tickets on every request and on a 5 s timer.\n  - The demo clock is persisted in the store (real-time start plus advanced minutes), and `POST /api/reset` restores the seed.\n- **Client:** every route in the UI spec — the four customer pages, the staff desk, the five admin pages and the public display — with a persona switcher, per-role navigation and role-gated routes. Data views poll every 2 s. Loading, error, toast, confirm-dialog and live-region states follow the spec, with the specified test IDs and labels. The CSS uses tokens only.\n- **Unit tests:** ticket numbering, FIFO order, position and wait, status transitions, slot generation, overlap and counter assignment, statistics and rounding, validation, history, and the staff action matrix. They use the seed worked examples, such as 13.8 and 11.3 averages and the CEN-GC-005 position of 3 with a 25-minute wait.\n\n**Choices**\n- I added `POST /api/clock/reset` (admin only) for the \"Reset clock\" button, which the contract did not list.\n- The slots endpoint omits past slots rather than listing them as unavailable.\n- Branch and service codes are validated as uppercase on the server. The form uppercases them as you type.\n- Admin and staff see inactive branches and services; customers and visitors do not.\n\n**Limitations**\n- The persona switcher is the demo login: there are no passwords and the server only checks the role.\n- Real-time updates use 2 s polling, not WebSocket.\n- The 360/390px layout and the contrast are untested."
+}

@@ -1,0 +1,30 @@
+{
+  "name": "QueueFlow",
+  "roles": ["visitor", "customer", "staff", "admin"],
+  "entities": ["User", "Branch", "Service", "Ticket", "Appointment"],
+  "primary_journey": {
+    "title": "A customer gets a queue ticket, is called by staff, is served, and the result shows in admin analytics",
+    "steps": [
+      "Switch to demo customer Emma Brown",
+      "Select Central Branch and General Consultation, choose Walk-in Queue and generate a ticket",
+      "Open My Tickets and note ticket number, position and estimated wait",
+      "Switch to staff Michael Chen (Central, counter 2), complete his seeded Serving ticket CEN-CS-001, then click Call Next (repeat with completion until the customer's ticket is called)",
+      "Return to the customer's My Tickets view without refreshing the page",
+      "As staff click Start Service then Complete Service",
+      "Switch to admin Jordan Ellis and open the dashboard",
+      "Refresh the browser"
+    ],
+    "expected": [
+      "Ticket CEN-GC-005 (next sequence after seeded CEN-GC-004) is shown with status Waiting",
+      "Position and estimated wait are shown (position = waiting tickets ahead + 1, wait = sum of ahead tickets' service minutes)",
+      "Staff dashboard shows the called customer as current; the earliest waiting ticket at the branch is the one called (FIFO)",
+      "The customer's ticket changes to Called within a few seconds without manual refresh",
+      "Ticket moves Serving then Completed and appears in the customer's history",
+      "Admin completed count and average service duration include the new ticket",
+      "All tickets, statuses and statistics persist after refresh"
+    ],
+    "mutates_state": true
+  },
+  "acceptance_mode": "provided",
+  "unit_tests_required": true
+}

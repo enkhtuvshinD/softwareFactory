@@ -1,0 +1,14 @@
+
+> app@0.1.0 build
+> tsc -p tsconfig.json && vite build
+
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 85 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.38 kB │ gzip:  0.26 kB
+dist/assets/index-D1wJ04Lf.css   16.74 kB │ gzip:  3.64 kB
+dist/assets/index-DY85a1ql.js   306.87 kB │ gzip: 90.66 kB
+
+✓ built in 76ms

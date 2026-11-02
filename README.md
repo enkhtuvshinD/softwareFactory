@@ -42,6 +42,7 @@ optional seed ──┴─► Requirements ─► Independent review ─► Desi
 - **Rendered evidence.** The designer selects 1–3 meaningful screens or states for this product. Each is captured at 1440×900 and 390×844, producing 2–6 PNGs. A one-screen calculator needs no artificial checkout or dashboard. A separate agent inspects final images after regression; plan, review and image hashes detect later changes.
 - **Relevant unit tests.** Products with meaningful pure logic require unit tests. Static presentation may declare `unit_tests_required: false` with a reviewed `unit_test_reason`; the report then marks unit verification not applicable. Existing unit tests always execute, even with that flag. UI acceptance and the primary read/interaction journey still run.
 - **Scoped tools.** Document agents get file tools; app agents may additionally run build, Vitest, Playwright and tsc. Stage prompts restrict writable paths. No package installs or arbitrary shell commands are allowed; remote seed image URLs can still be loaded by the browser.
+- **Project skills.** `.claude/skills/` holds on-demand knowledge that stage prompts load only when relevant: `mn-locale` (Mongolian briefs), `e2e-contract` (one shared builder/QA contract for design, build and tests), `playwright-debug` (fix stage after e2e failures), `a11y-visual-check` (polish and final image review). `demo-pitch` is manual only: run `/demo-pitch [project]` in Claude Code after a run to get `quality/pitch.md`.
 - **Isolated runs.** `--setting-sources project` keeps personal Claude settings, hooks and memory out of the factory.
 - **Fast start.** The app skeleton (boilerplate only, no domain code) has dependencies preinstalled and is cloned per run in under a second.
 
@@ -116,6 +117,7 @@ Tests use temporary directories and mocked provider/build commands. They check d
 ## Layout
 
 ```
+.claude/skills/     on-demand agent skills + manual demo-pitch
 factory/
   run.sh            orchestrator: stages, gates, budget, verify/fix loop
   setup.sh          one-time dependency install

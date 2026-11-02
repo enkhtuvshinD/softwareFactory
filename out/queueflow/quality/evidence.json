@@ -1,0 +1,32 @@
+{
+  "status": "pass",
+  "verified_at": "2026-11-01T14:46:19.886Z",
+  "review_sha256": "4360043402ab529ba09f2b07ca113a1befa7d11a2cc164de1dae23614a4961c3",
+  "visual_plan_sha256": "689fa8425fc129570835826c2e32330b089d4e6618db603547ba10c7710ef526",
+  "screenshots": [
+    {
+      "path": "app/visual-evidence/desktop-primary.png",
+      "sha256": "cbc4ca16593b4fc9c8e606ebdda2efc358a52f06eb79a3da957f541b67ac2b1e"
+    },
+    {
+      "path": "app/visual-evidence/desktop-staff-desk.png",
+      "sha256": "226931efa176dd37f593a9d9400447204d0a38795e68d581103d9e36a57dea29"
+    },
+    {
+      "path": "app/visual-evidence/desktop-admin-dashboard.png",
+      "sha256": "ac4112e6710377433dd9bded3a9071ab98b0f5df237bb8f21cdf5e1e7e65aa72"
+    },
+    {
+      "path": "app/visual-evidence/mobile-primary.png",
+      "sha256": "5d28a4a939ec4866e883763f9edbad1630b6fd125c1eba3e12239e8d786791eb"
+    },
+    {
+      "path": "app/visual-evidence/mobile-staff-desk.png",
+      "sha256": "1bdb8ee4d5b9416f87524b281f8a82dff930c8ead240c424a2fef066909c95e1"
+    },
+    {
+      "path": "app/visual-evidence/mobile-admin-dashboard.png",
+      "sha256": "1c4c80885cefc3ef4ffc50d525b09b196a73547caa87c4edc11e1d5dceb82055"
+    }
+  ]
+}

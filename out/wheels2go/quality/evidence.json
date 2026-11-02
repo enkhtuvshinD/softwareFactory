@@ -1,0 +1,32 @@
+{
+  "status": "pass",
+  "verified_at": "2026-11-01T13:51:00.518Z",
+  "review_sha256": "8379c8ccd999aef4d14ecd77764be110b6a016e8bc431861b0cfc13401534981",
+  "visual_plan_sha256": "c57476087cea8195d1d675bd83957d735a630859ff25ba527aaf287cbc51fef0",
+  "screenshots": [
+    {
+      "path": "app/visual-evidence/desktop-catalog.png",
+      "sha256": "931bcce89d2973202b780bf41c5fa6c90bd14cce472b0dc5536959cf2b9ec3e8"
+    },
+    {
+      "path": "app/visual-evidence/desktop-booking.png",
+      "sha256": "3844513a353defda41982f9a778fc8f7c84ca4be74188fb6551ed08dc41cd137"
+    },
+    {
+      "path": "app/visual-evidence/desktop-requests.png",
+      "sha256": "fca31e74ae6a4bf689a4aa0a6afab0a23f7a6832da2f15176ef3d33ad9d248ec"
+    },
+    {
+      "path": "app/visual-evidence/mobile-catalog.png",
+      "sha256": "2922c21325fb92e014298cc78463ff2025cd51dfa682480cdf5d699017241460"
+    },
+    {
+      "path": "app/visual-evidence/mobile-booking.png",
+      "sha256": "98e377718029d0ec628f7f88741183f52f68f6d3ed08bcf02905265cd77c273a"
+    },
+    {
+      "path": "app/visual-evidence/mobile-requests.png",
+      "sha256": "217d23f6049ef4764d8eb827412da7740e83fa742a1508004f6b78a2c399e5e7"
+    }
+  ]
+}
