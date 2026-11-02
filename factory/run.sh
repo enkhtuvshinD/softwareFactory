@@ -161,7 +161,8 @@ NODE
 }
 
 verify() {
-  local base="$LOGS/verify-$1" build=fail unit=skipped e2e=skipped unit_mode e2e_counts=''
+  local base="$LOGS/verify-$1" build=fail unit=skipped e2e=skipped unit_mode e2e_counts='' started_at
+  started_at=$(date -u +%FT%TZ)
   FAILED_LOGS=()
   # A failed build must not leave previous green test results in the final report.
   rm -f "$APP/test-results/results.json" "$OUT/quality/evidence.json" "$OUT/quality/visual-review.json"
@@ -194,7 +195,8 @@ verify() {
   fi
   jq -n --arg round "$1" --arg build "$build" --arg unit "$unit" --arg e2e "$e2e" \
     '{round: $round, build: $build, unit: $unit, e2e: $e2e}' >"$LOGS/verify.json"
-  jq -c --arg counts "$e2e_counts" '. + {e2e_counts: $counts}' "$LOGS/verify.json" >>"$LOGS/verify-history.jsonl"
+  jq -c --arg counts "$e2e_counts" --arg started "$started_at" --arg finished "$(date -u +%FT%TZ)" \
+    '. + {e2e_counts: $counts, started_at: $started, finished_at: $finished}' "$LOGS/verify.json" >>"$LOGS/verify-history.jsonl"
   say "verify $1: build=$build unit=$unit e2e=$e2e"
   [[ $build == pass && ( $unit == pass || $unit == not_applicable ) && $e2e == pass ]]
 }
@@ -295,6 +297,7 @@ finish() {
     '.finished_at = $t | .status = (if $code == 0 then "pass" elif $code == 130 then "interrupted" else "fail" end)' \
     "$LOGS/run.json" >"$LOGS/run.json.tmp" &&
     mv "$LOGS/run.json.tmp" "$LOGS/run.json"
+  node "$FACTORY/lib/dashboard.mjs" "$OUT" || true
   node "$FACTORY/lib/report.mjs" "$OUT" || true
   exit "$1"
 }

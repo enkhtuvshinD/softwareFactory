@@ -277,7 +277,7 @@ ${toolErrors.length ? `\nTool errors:\n\n${toolErrors.map((error) => `- ${cell(e
 - Design: [design/ui-spec.md](design/ui-spec.md), [design/visual-plan.json](design/visual-plan.json), [design/tokens.json](design/tokens.json), [design/tokens.css](design/tokens.css)
 - Application: [app/](app/) — run with \`cd app && npm ci && npm run build && npm start\` from this folder, then open http://localhost:3000
 - Tests: [app/e2e/](app/e2e/), unit tests in \`app/shared/*.test.ts\`, [HTML report](app/playwright-report/index.html)
-${exists('quality/demo.md') ? '- Demo script: [quality/demo.md](quality/demo.md)\n' : ''}- Agent transcripts: [logs/](logs/)
+${exists('quality/demo.md') ? '- Demo script: [quality/demo.md](quality/demo.md)\n' : ''}${exists('DASHBOARD.html') ? '- Run dashboard (orchestration timeline, cost per stage, failures and fixes): [DASHBOARD.html](DASHBOARD.html)\n' : ''}- Agent transcripts: [logs/](logs/)
 `;
   return report;
 }

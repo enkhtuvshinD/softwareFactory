@@ -1,4 +1,4 @@
-# Challenge Brief: "Wheels2Go" (P2P Mobility Marketplace — Car Only)
+<!-- # Challenge Brief: "Wheels2Go" (P2P Mobility Marketplace — Car Only)
 
 ## Objective
 
@@ -53,7 +53,7 @@ Booking & Reservation Flow (Renter & Owner):
 
 ## Seed Data
 
-The pre-populated seed dataset is provided separately as `seed.json` (users, cars, bookings).
+The pre-populated seed dataset is provided separately as `seed.json` (users, cars, bookings). -->
 
 //2
 
@@ -549,3 +549,285 @@ TR-6: Admin Analytics
 ## Final Objective
 
 Deliver a complete digital queue management platform demonstrating the AI Factory's ability to autonomously understand business workflows, generate requirements, design interfaces, implement application logic, maintain data consistency, and validate functionality through automated QA tests. -->
+
+//4
+
+# Build GymFlow — AI-Powered Gym Workout Planner
+
+Build a fully functional, responsive web application called **GymFlow**, an intelligent gym workout planning and fitness progress tracking platform.
+
+The application helps users create personalized workout schedules based on their fitness goals, experience level, available training days, and preferred workout duration.
+
+## 1. User Profile & Fitness Assessment
+
+Users must be able to create and manage their fitness profiles.
+
+Collect the following information:
+
+- Name
+- Age
+- Gender (optional)
+- Height (cm)
+- Weight (kg)
+- Fitness goal:
+  - Muscle Building (Hypertrophy)
+  - Weight Loss
+  - Strength Training
+  - General Fitness
+- Experience level:
+  - Beginner
+  - Intermediate
+  - Advanced
+- Available training days per week
+- Preferred workout duration (30, 45, 60, or 90 minutes)
+- Available equipment:
+  - Full Gym
+  - Dumbbells
+  - Barbell
+  - Bodyweight Only
+
+## 2. Workout Plan Generator
+
+Generate a personalized weekly workout schedule based on the user's profile.
+
+The workout generator must consider:
+
+- Fitness goal.
+- Training experience.
+- Available training days.
+- Target muscle groups.
+- Recovery time between sessions.
+- Available equipment.
+- Workout duration.
+
+Support the following training splits:
+
+- Full Body
+- Upper / Lower
+- Push / Pull / Legs (PPL)
+- Bro Split
+
+Generate a complete 7-day schedule.
+
+Each workout day must include:
+
+- Training day name.
+- Target muscle groups.
+- Exercise list.
+- Number of sets.
+- Repetitions.
+- Rest time between sets.
+- Recommended exercise order.
+
+Include appropriate rest and recovery days.
+
+## 3. Exercise Library
+
+Create an exercise database with:
+
+- Exercise name.
+- Target muscle group.
+- Secondary muscle groups.
+- Equipment required.
+- Difficulty level.
+- Exercise instructions.
+- Sets and repetition recommendations.
+
+Muscle groups:
+
+- Chest
+- Back
+- Shoulders
+- Biceps
+- Triceps
+- Legs
+- Glutes
+- Abs
+- Calves
+
+Users must be able to search and filter exercises by muscle group and equipment.
+
+## 4. Workout Session Tracking
+
+Users can start a workout session from their weekly plan.
+
+During a session, users can:
+
+- View the current exercise.
+- Record weight lifted.
+- Record completed repetitions.
+- Mark sets as completed.
+- Track rest time.
+- Skip or replace an exercise.
+- Finish the workout.
+
+Save completed workout sessions in their history.
+
+## 5. Progressive Overload
+
+Implement a workout progression tracking feature.
+
+For each exercise:
+
+- Store previous workout weights and repetitions.
+- Display previous performance.
+- Suggest increasing weight or repetitions when appropriate.
+- Track personal records (PR).
+- Display progression history.
+
+Progression suggestions must be conservative and appropriate for the user's experience level.
+
+## 6. Fitness Dashboard
+
+Create a dashboard displaying:
+
+- Current weekly workout schedule.
+- Total workouts completed.
+- Total training volume.
+- Current body weight.
+- Workout consistency.
+- Personal records.
+- Weekly training statistics.
+
+Calculate training volume as:
+
+Total Volume = Sum of (Weight × Repetitions × Completed Sets)
+
+Display progress using charts and visual statistics.
+
+## 7. Body Measurement Tracking
+
+Allow users to record:
+
+- Body weight.
+- Chest circumference.
+- Waist circumference.
+- Arm circumference.
+- Thigh circumference.
+
+Display historical progress using charts.
+
+## 8. Workout Plan Management
+
+Users can:
+
+- Generate a new workout plan.
+- Edit their existing workout plan.
+- Replace exercises.
+- Change workout days.
+- Adjust sets and repetitions.
+- Mark workouts as completed.
+- Regenerate a plan when their goals or availability change.
+
+Do not overwrite workout history when regenerating a plan.
+
+## 9. Smart Workout Recommendations
+
+Provide rule-based workout recommendations based on:
+
+- Missed workout days.
+- Training frequency.
+- Recent exercise performance.
+- Recovery days.
+- Training consistency.
+
+Avoid scheduling the same major muscle group on consecutive days without adequate recovery.
+
+Do not recommend aggressive weight increases or excessive training volume.
+
+## 10. UI/UX Requirements
+
+Design a premium fitness SaaS dashboard.
+
+Design direction:
+
+- Modern dark-themed gym interface.
+- Clean typography.
+- Responsive desktop and mobile layouts.
+- Exercise cards with visual illustrations or images.
+- Weekly calendar view.
+- Progress charts.
+- Clear workout completion indicators.
+- Intuitive workout session interface.
+
+Prioritize usability and functional completeness over unnecessary animations.
+
+## 11. Data Persistence
+
+- Persist user profiles.
+- Persist workout plans.
+- Persist exercise records.
+- Persist workout history.
+- Persist body measurements.
+- Data must survive page refreshes.
+- Maintain consistency across dashboard views.
+
+## 12. Seed Dataset
+
+Create a demo user:
+
+Name: Alex Rivera
+Age: 25
+Height: 175 cm
+Weight: 70 kg
+Fitness Goal: Muscle Building
+Experience: Intermediate
+Training Days: 4 days per week
+Workout Duration: 60 minutes
+Equipment: Full Gym
+
+Create an exercise library containing at least 20 exercises across all major muscle groups.
+
+Generate an initial 4-day Upper/Lower workout plan.
+
+## 13. Acceptance Criteria
+
+TR-1: Workout Plan Generation
+
+Create a profile with Muscle Building, Intermediate experience, and 4 available training days.
+
+Expected result: A 4-day workout plan with appropriate training and recovery days.
+
+TR-2: Exercise Customization
+
+Replace an exercise in the weekly workout plan.
+
+Expected result: The new exercise appears in the plan and the old exercise is removed without affecting other workout days.
+
+TR-3: Workout Tracking
+
+Start a workout, record 3 sets of 10 repetitions at 50 kg for an exercise, and complete the session.
+
+Expected result: Workout history records the completed sets and total volume of 1,500 kg.
+
+TR-4: Progressive Overload
+
+Complete an exercise session and enter new performance data in the next session.
+
+Expected result: Previous performance is displayed and an appropriate progression suggestion is generated.
+
+TR-5: Body Progress Tracking
+
+Record body weight at multiple dates.
+
+Expected result: Dashboard displays a historical weight progression chart.
+
+TR-6: Data Persistence
+
+Create a workout plan and complete a session. Refresh the application.
+
+Expected result: All workout plans, history, and measurements remain available.
+
+## 14. Technical Quality
+
+- Fully functional application, not a static prototype.
+- All primary buttons and forms must work.
+- Validate all inputs.
+- No critical runtime errors.
+- Maintain data consistency.
+- Include demo user access.
+- Provide setup instructions in README.
+
+## Final Objective
+
+Deliver a complete gym workout planning and tracking platform that transforms user fitness profiles into personalized training schedules, tracks workout performance, supports progressive overload, and visualizes long-term fitness progress.

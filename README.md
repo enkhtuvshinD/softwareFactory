@@ -29,7 +29,7 @@ optional seed ──┴─► Requirements ─► Independent review ─► Desi
 | 4 | Verify → Fix loop | type-check + build, actual Vitest tests, Playwright; debugger gets failing logs (max 3 rounds per phase) | every required test executed and passed; no skips or expected failures |
 | 5 | UI Polish | Inspect planned rendered images; bounded client/style changes; `quality/polish.md` | full verification runs again after changes |
 | 6 | Final Visual Reviewer | Read final desktop/mobile images; `quality/visual-review.json`, optional `quality/demo.md` | every planned PNG reviewed; no material defects; runner stamps SHA256 evidence |
-| 7 | Report | `out/REPORT.md` — provided/derived acceptance and supplemental results, reviews, evidence, confirmed/reserved costs and time, per-stage tokens, tool calls, tool errors and skills | incomplete checks remain explicit |
+| 7 | Report | `out/REPORT.md` — provided/derived acceptance and supplemental results, reviews, evidence, confirmed/reserved costs and time, per-stage tokens, tool calls, tool errors and skills; `out/DASHBOARD.html` — orchestration timeline, time/cost/tokens and files written per stage, failed rounds with the fix agent's explanation | incomplete checks remain explicit |
 
 ## Design choices
 
@@ -144,12 +144,13 @@ factory/
   prompts/          one prompt per agent + shared system prompt
   lib/stream.mjs    live progress + per-stage cost capture
   lib/report.mjs    REPORT.md generator
+  lib/dashboard.mjs DASHBOARD.html generator
   lib/control.mjs   atomic budget reservations
   lib/limit.mjs     command deadline and process-group cleanup
   lib/gates.mjs     requirements, test results and final evidence checks
   template/         app skeleton (Vite + React, Express, Vitest, Playwright)
 input/              current example brief + optional seed data
 examples/           brief-only calculator, CRM, portfolio; restaurant and Wheels2Go variants with seed
-out/<product>/      one folder per run: requirements/, design/, app/, quality/, logs/, REPORT.md
+out/<product>/      one folder per run: requirements/, design/, app/, quality/, logs/, REPORT.md, DASHBOARD.html
 out/latest          symlink to the most recent project
 ```
