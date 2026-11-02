@@ -244,7 +244,7 @@ ${stages.map((stage) => `| ${cell(stage.stage)} | ${cell(stage.model ?? 'not rec
 
 - Requirements: [requirements/requirements.md](requirements/requirements.md), [requirements/product.json](requirements/product.json), [requirements/acceptance.json](requirements/acceptance.json)
 - Design: [design/ui-spec.md](design/ui-spec.md), [design/visual-plan.json](design/visual-plan.json), [design/tokens.json](design/tokens.json), [design/tokens.css](design/tokens.css)
-- Application: [app/](app/) — run with \`cd app && npm start\` from this folder, then open http://localhost:3000
+- Application: [app/](app/) — run with \`cd app && npm ci && npm run build && npm start\` from this folder, then open http://localhost:3000
 - Tests: [app/e2e/](app/e2e/), unit tests in \`app/shared/*.test.ts\`, [HTML report](app/playwright-report/index.html)
 ${exists('quality/demo.md') ? '- Demo script: [quality/demo.md](quality/demo.md)\n' : ''}- Agent transcripts: [logs/](logs/)
 `;

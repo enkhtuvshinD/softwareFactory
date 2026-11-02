@@ -99,7 +99,7 @@ The output platform remains the included web-app stack and installed dependencie
 
 Resume within the original deadline: `./factory/run.sh --from 2` (1 fresh run; 2 requirements review + design; 3 build + tests; 4 verify/fix). Resume continues `out/latest`; pick another project with `PROJECT=wheels2go ./factory/run.sh --from 3`. Stages 3 and 4 require an approved requirements review. Every resume performs polish, final regression and final image review. Start a fresh run for artifacts from the older pipeline or after the deadline expires.
 
-Try the generated app: `cd out/latest/app && npm start` → http://localhost:3000
+Try the generated app (a fresh clone has no `node_modules` or `dist`): `cd out/<project>/app && npm ci && npm run build && npm start` → http://localhost:3000
 
 ## Configuration (environment variables)
 
