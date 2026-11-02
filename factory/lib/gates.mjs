@@ -93,7 +93,7 @@ export function validateDesign(out) {
   assert(tokens && typeof tokens === 'object' && !Array.isArray(tokens) && Object.keys(tokens).length > 0,
     'Design tokens must be a nonempty JSON object');
   assert(text(fs.readFileSync(path.join(out, 'design/tokens.css'), 'utf8')), 'Design CSS is missing');
-  assert(fs.readFileSync(path.join(out, 'design/ui-spec.md'), 'utf8').includes('data-testid'), 'Design UI test contract is missing');
+  assert(fs.readFileSync(path.join(out, 'design/ui-spec.md'), 'utf8').includes('testid'), 'Design UI test contract is missing');
   return validateVisualPlan(out);
 }
 

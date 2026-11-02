@@ -552,7 +552,7 @@ Deliver a complete digital queue management platform demonstrating the AI Factor
 
 //4
 
-# Build GymFlow — AI-Powered Gym Workout Planner
+<!-- # Build GymFlow — AI-Powered Gym Workout Planner
 
 Build a fully functional, responsive web application called **GymFlow**, an intelligent gym workout planning and fitness progress tracking platform.
 
@@ -830,4 +830,675 @@ Expected result: All workout plans, history, and measurements remain available.
 
 ## Final Objective
 
-Deliver a complete gym workout planning and tracking platform that transforms user fitness profiles into personalized training schedules, tracks workout performance, supports progressive overload, and visualizes long-term fitness progress.
+Deliver a complete gym workout planning and tracking platform that transforms user fitness profiles into personalized training schedules, tracks workout performance, supports progressive overload, and visualizes long-term fitness progress. -->
+
+# AI Factory Hackathon Challenge: Wheels2Go
+
+## Build a Production-Quality Peer-to-Peer Car Rental Marketplace
+
+You are an autonomous senior full-stack engineering team operating as an AI Factory.
+
+Your mission is to transform the following business requirements into a fully functional, visually polished, reliable web application called **Wheels2Go**.
+
+Do not build a static prototype or a collection of disconnected UI screens. Build a complete, working product with real user workflows, persistent data, business logic, and verifiable test results.
+
+---
+
+# 1. Product Vision
+
+Wheels2Go is a peer-to-peer car rental marketplace that connects people who own cars with people who need to rent them.
+
+The platform has two primary user experiences:
+
+- **Car Owners:** List vehicles, manage availability, handle rental requests, and track earnings.
+- **Renters:** Discover vehicles, compare options, make reservations, and manage their trips.
+
+The application should feel like a modern commercial car rental platform, not a generic CRUD dashboard.
+
+Prioritize a seamless booking experience, clear pricing, trustworthy information, and intuitive navigation.
+
+# 2. Engineering Principles
+
+Follow these principles throughout development:
+
+1. Functional completeness over visual mockups.
+2. Reusable components and clean architecture.
+3. Consistent data across all user roles.
+4. Reliable booking and pricing calculations.
+5. Persistent storage with proper data validation.
+6. Responsive design across desktop, tablet, and mobile.
+7. No dead buttons, fake interactions, or placeholder workflows.
+8. Clear loading, success, empty, and error states.
+9. Minimal unnecessary dependencies.
+10. Deliver a working application, not just source code that looks correct.
+
+Before implementing anything, inspect the existing repository, available tools, framework, database, and official seed dataset.
+
+Reuse the existing project structure and technology stack where practical. Do not unnecessarily replace working infrastructure.
+
+# 3. User Roles and Demo Authentication
+
+Implement two demo user roles:
+
+### Car Owner
+
+- Manage personal vehicle listings.
+- Create, edit, enable, disable, and delete listings.
+- Review incoming booking requests.
+- Approve or reject pending requests.
+- Track completed rentals and earnings.
+
+### Renter
+
+- Browse and search available cars.
+- View detailed vehicle information.
+- Submit booking requests.
+- View booking history.
+- Cancel eligible reservations.
+
+### Demo Account Switching
+
+Provide a visible and intuitive account switcher for hackathon judges.
+
+It must allow switching between the seeded Owner and Renter accounts without requiring external authentication.
+
+Important:
+
+- Switching accounts must update the entire application context.
+- Role-specific navigation and permissions must be enforced.
+- Owner-only actions must not be available to Renters.
+- Data must remain consistent when switching accounts.
+
+# 4. Owner Experience
+
+Build a dedicated Owner Dashboard.
+
+### 4.1 Dashboard Overview
+
+Display:
+
+- Total listed vehicles.
+- Active listings.
+- Total completed rentals.
+- Total earnings.
+- Pending booking requests.
+- Recent booking activity.
+
+Use meaningful KPI cards and readable visualizations.
+
+### 4.2 Vehicle Management
+
+Owners can:
+
+- Create new vehicle listings.
+- Edit existing listings.
+- Activate or deactivate listings.
+- Delete their own listings.
+- View their vehicle inventory.
+
+Each vehicle must contain:
+
+- Make
+- Model
+- Year
+- Fuel type: Gasoline, Hybrid, Electric
+- Transmission: Automatic, Manual
+- Number of seats
+- Daily rental price
+- Cleaning fee
+- Vehicle image URL
+- Pickup location
+- Full pickup address
+- Pickup instructions
+- Availability status
+- Owner reference
+
+Validation:
+
+- Required fields cannot be empty.
+- Rental price and cleaning fee cannot be negative.
+- Year must be valid.
+- Seats must be a positive integer.
+- Image URLs must be valid when provided.
+- Invalid submissions must display helpful validation messages.
+
+### 4.3 Booking Management
+
+Owners must have a dedicated booking management page.
+
+Display:
+
+- Renter information.
+- Vehicle information.
+- Rental start and end dates.
+- Number of rental days.
+- Total booking price.
+- Booking creation date.
+- Current booking status.
+
+Available actions:
+
+- Approve pending requests.
+- Reject pending requests.
+- View complete booking details.
+
+Only the vehicle owner can approve or reject requests for their own vehicles.
+
+An owner cannot approve a conflicting reservation.
+
+### 4.4 Earnings Dashboard
+
+Calculate earnings using completed rentals.
+
+Display:
+
+- Total completed rentals.
+- Total revenue.
+- Revenue by vehicle.
+- Recent completed bookings.
+- Revenue summary.
+
+Do not count pending, cancelled, or rejected bookings as earned revenue.
+
+# 5. Renter Experience
+
+Build a dedicated Marketplace experience.
+
+### 5.1 Marketplace Homepage
+
+Create a premium marketplace landing page with:
+
+- Attractive hero section.
+- Prominent search functionality.
+- Featured available vehicles.
+- Vehicle category or brand shortcuts.
+- Clear calls to action.
+- Trust-building information.
+
+### 5.2 Vehicle Cards
+
+Display vehicles in a responsive grid.
+
+Every card must include:
+
+- High-quality vehicle image.
+- Make, model, and year.
+- Daily rental price.
+- Fuel type.
+- Transmission.
+- Number of seats.
+- Pickup location.
+- Availability status.
+- View details action.
+
+Use consistent image dimensions and professional card layouts.
+
+### 5.3 Vehicle Details
+
+Create a dedicated vehicle details view.
+
+Display:
+
+- Large vehicle image gallery or hero image.
+- Vehicle specifications.
+- Owner information.
+- Pickup location and address.
+- Pickup instructions.
+- Daily rental rate.
+- Cleaning fee.
+- Availability information.
+- Booking form.
+
+The booking action must be intuitive and easy to find.
+
+### 5.4 Search and Filtering
+
+Implement real, combinable filters:
+
+- Make / Brand
+- Model
+- Location keyword
+- Maximum daily rental price
+- Transmission
+- Fuel type
+
+Requirements:
+
+- All filters must work together.
+- Results update immediately.
+- Search must be case-insensitive.
+- Filters must work with partial text matches where appropriate.
+- Provide a clear-all-filters action.
+- Show the number of matching vehicles.
+- Display a helpful empty state when no vehicles match.
+
+Do not implement filters that only change their visual appearance.
+
+# 6. Booking Engine and Pricing
+
+Implement a complete reservation workflow.
+
+### 6.1 Booking Process
+
+A Renter must be able to:
+
+1. Select a vehicle.
+2. Select a rental start date.
+3. Select a rental end date.
+4. Review pickup information.
+5. Review the complete price breakdown.
+6. Submit a booking request.
+7. Receive clear confirmation that the request was submitted.
+
+### 6.2 Pricing Calculation
+
+Use the following formula:
+
+Total Price = (Rental Days × Daily Rate) + Cleaning Fee
+
+Example:
+
+- Vehicle: Tesla Model Y
+- Daily rate: $85
+- Rental duration: 3 days
+- Cleaning fee: $25
+
+Expected calculation:
+
+- Rental subtotal: $255
+- Cleaning fee: $25
+- Final total: $280
+
+The UI must update the pricing breakdown immediately when dates change.
+
+Use one consistent date calculation rule throughout the application. Treat the rental period as a half-open interval: start date inclusive, end date exclusive.
+
+### 6.3 Booking Validation
+
+Enforce all of the following:
+
+- Start date cannot be in the past.
+- End date must be after start date.
+- Rental duration must be at least one day.
+- Unavailable vehicles cannot be booked.
+- A vehicle cannot have overlapping confirmed bookings.
+- Invalid requests must be rejected.
+- Display meaningful error messages.
+- Prevent duplicate submissions.
+
+### 6.4 Conflict Prevention
+
+This is a critical business requirement.
+
+Use the following overlap condition:
+
+`newStart < existingEnd && newEnd > existingStart`
+
+A new booking must be blocked if it overlaps with an existing confirmed booking for the same vehicle.
+
+The conflict check must happen when submitting the booking and again when the owner approves a pending request.
+
+If multiple users attempt to reserve the same vehicle simultaneously, the application must prevent conflicting confirmed bookings through an atomic database operation, transaction, or appropriate locking mechanism supported by the selected persistence layer.
+
+Do not rely exclusively on frontend validation.
+
+# 7. Booking Status Lifecycle
+
+Implement these statuses:
+
+- Pending
+- Confirmed
+- Cancelled
+- Completed
+
+### Status Rules
+
+**Pending**
+
+- Created when a Renter submits a valid booking.
+- Visible in both Owner and Renter dashboards.
+
+**Confirmed**
+
+- Set only when the Owner approves a pending request.
+- Must pass the booking conflict check.
+- Immediately reflected in both dashboards.
+
+**Cancelled**
+
+- Set when an eligible booking is cancelled.
+- Must release the reservation period.
+- Must be reflected consistently across the application.
+
+**Completed**
+
+- Represents a finished rental.
+- Included in completed rental statistics and earnings.
+- Must not be counted as revenue before completion.
+
+Rejecting a pending request should transition it to Cancelled.
+
+Implement appropriate permission checks and prevent invalid status transitions.
+
+# 8. Data Persistence and Architecture
+
+Use the database or persistent storage already available in the project.
+
+If no backend database exists, use a suitable persistent storage implementation and explain its limitations.
+
+Requirements:
+
+- Data survives browser refreshes.
+- Vehicle changes appear across all relevant pages.
+- Booking changes appear across both dashboards.
+- Owner and Renter views use the same source of truth.
+- Prevent duplicate and conflicting reservations.
+- Preserve existing seeded records.
+- Maintain relationships between users, vehicles, and bookings.
+
+Suggested data entities:
+
+**User**
+
+- id
+- name
+- email
+- role
+
+**Car**
+
+- id
+- ownerId
+- make
+- model
+- year
+- fuelType
+- transmission
+- seats
+- dailyRate
+- cleaningFee
+- imageUrl
+- pickupLocation
+- pickupAddress
+- pickupInstructions
+- isAvailable
+
+**Booking**
+
+- id
+- carId
+- ownerId
+- renterId
+- startDate
+- endDate
+- rentalDays
+- dailyRate
+- cleaningFee
+- totalPrice
+- status
+- createdAt
+- updatedAt
+
+Store the price values used at booking time so historical bookings do not change when an owner updates vehicle pricing.
+
+# 9. Official Seed Dataset
+
+The hackathon provides an official JSON seed dataset.
+
+It contains:
+
+- 2 demo users: 1 Owner and 1 Renter.
+- 3 vehicles:
+  - Tesla Model Y
+  - Ford Bronco
+  - BMW M3
+- 1 existing confirmed booking.
+
+Critical requirements:
+
+- Inspect the provided seed JSON before implementation.
+- Preserve original IDs and relationships.
+- Do not replace the official seed data with invented data.
+- Ensure seed data is available on the initial application launch.
+- Avoid duplicating seed records on subsequent launches.
+- Ensure the existing confirmed booking is included in availability calculations.
+- Keep demo account switching connected to the actual seeded users.
+
+# 10. Premium UI/UX Design Direction
+
+Create a modern, premium automotive marketplace.
+
+### Visual Direction
+
+Use a clean, sophisticated visual language inspired by premium mobility and travel platforms.
+
+Suggested direction:
+
+- Neutral backgrounds.
+- Strong typography.
+- High-quality vehicle imagery.
+- Consistent spacing.
+- Subtle borders and shadows.
+- Carefully designed cards.
+- Clear visual hierarchy.
+- Professional status indicators.
+- Consistent iconography.
+
+Avoid:
+
+- Generic dashboard templates.
+- Excessive gradients.
+- Unnecessary animations.
+- Crowded layouts.
+- Random colors.
+- Oversized components.
+- Placeholder images.
+- Inconsistent typography.
+
+### Navigation
+
+Provide intuitive navigation for both roles.
+
+Renter navigation:
+
+- Explore Cars
+- My Bookings
+- Profile / Account Switcher
+
+Owner navigation:
+
+- Dashboard
+- My Vehicles
+- Bookings
+- Earnings
+- Profile / Account Switcher
+
+### Responsive Design
+
+The application must work properly on:
+
+- Desktop
+- Tablet
+- Mobile
+
+Ensure forms, navigation, booking dialogs, vehicle cards, and dashboards adapt to smaller screens.
+
+### Interaction States
+
+Implement:
+
+- Loading states.
+- Empty states.
+- Form validation states.
+- Success notifications.
+- Error notifications.
+- Confirmation dialogs for destructive actions.
+- Disabled states for unavailable actions.
+
+# 11. Automated QA and Acceptance Testing
+
+Do not consider the application complete until the following scenarios have been executed.
+
+### TR-1: Vehicle Creation
+
+1. Switch to Owner.
+2. Create a Tesla Model Y 2023.
+3. Set daily rate to $85.
+4. Set cleaning fee to $25.
+5. Set pickup location to Airport Hub.
+6. Save the vehicle.
+7. Verify it appears immediately in the marketplace.
+
+Expected: PASS.
+
+### TR-2: Search and Filtering
+
+1. Open the marketplace.
+2. Filter by Tesla.
+3. Set maximum daily price to $90.
+4. Verify only matching vehicles are displayed.
+
+Expected: Only matching vehicles appear.
+
+### TR-3: Dynamic Pricing
+
+1. Select Tesla Model Y.
+2. Choose a three-day rental.
+3. Verify daily rate is $85.
+4. Verify cleaning fee is $25.
+5. Verify the total is $280.
+
+Expected: $280.00.
+
+### TR-4: Owner Booking Approval
+
+1. Switch to Renter.
+2. Submit a valid booking.
+3. Switch to Owner.
+4. Open incoming booking requests.
+5. Approve the pending request.
+6. Switch back to Renter.
+7. Verify the booking status.
+
+Expected: Both dashboards show Confirmed.
+
+### TR-5: Booking Conflict Prevention
+
+1. Create a confirmed booking for a specific vehicle.
+2. Attempt another booking for the same vehicle with overlapping dates.
+3. Submit the second request.
+
+Expected: The conflicting reservation is rejected or blocked with a clear error.
+
+Also verify that non-overlapping dates can still be booked.
+
+### TR-6: Data Persistence
+
+1. Create a new vehicle.
+2. Create a booking.
+3. Refresh the browser.
+4. Switch between Owner and Renter.
+
+Expected: All records and statuses remain consistent.
+
+### Additional QA
+
+Test:
+
+- Invalid dates.
+- Past dates.
+- Missing required fields.
+- Negative rental prices.
+- Unavailable vehicles.
+- Booking cancellation.
+- Vehicle deletion.
+- Disabled listings.
+- Unauthorized owner actions.
+- Duplicate submissions.
+- Empty marketplace results.
+- Responsive mobile layout.
+
+Use automated browser tests where available. Otherwise, perform systematic manual verification and document the results.
+
+Do not report a test as PASS unless it was actually executed and verified.
+
+# 12. Implementation Workflow
+
+Work autonomously through the following phases.
+
+**Phase 1 — Repository Inspection**
+
+- Inspect existing project files.
+- Identify framework and architecture.
+- Locate the official seed dataset.
+- Identify available database and development tools.
+- Understand existing application functionality.
+
+**Phase 2 — Architecture**
+
+- Define data models.
+- Define user role permissions.
+- Design booking lifecycle.
+- Implement pricing and availability rules.
+- Establish shared data state.
+
+**Phase 3 — Core Development**
+
+- Build the marketplace.
+- Build vehicle management.
+- Build booking workflows.
+- Build Owner and Renter dashboards.
+- Implement persistence.
+
+**Phase 4 — UI/UX Polish**
+
+- Improve visual consistency.
+- Optimize responsive layouts.
+- Add meaningful interaction states.
+- Verify navigation and accessibility.
+
+**Phase 5 — QA**
+
+- Execute all acceptance tests.
+- Fix discovered bugs.
+- Check browser console and runtime errors.
+- Verify persistence and cross-role consistency.
+
+**Phase 6 — Delivery**
+
+- Provide a README.
+- Explain how to start the application.
+- Document demo accounts.
+- Document implemented functionality.
+- Provide automated QA results.
+- List any known limitations honestly.
+
+# 13. Definition of Done
+
+The project is complete only when:
+
+- All primary workflows function end to end.
+- Owner and Renter roles work correctly.
+- Vehicle CRUD operations work.
+- Marketplace filtering works.
+- Booking and pricing calculations are correct.
+- Conflicting reservations are prevented.
+- Booking status updates are consistent.
+- Data persists after refresh.
+- Official seed data is preserved.
+- Responsive UI is implemented.
+- No critical runtime errors remain.
+- Acceptance tests have been executed.
+- README documentation is included.
+
+# FINAL INSTRUCTION
+
+Act as an autonomous senior engineering team.
+
+Do not stop after planning or generating a visual mockup.
+
+Inspect the repository, make implementation decisions, build the complete application, run it, test it, fix issues, and deliver a working product.
+
+Prioritize a fully functional, reliable, and impressive end-to-end experience.
+
+**The final deliverable must be a working Wheels2Go marketplace that a hackathon judge can open, explore, and test immediately.**

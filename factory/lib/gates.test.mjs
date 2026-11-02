@@ -261,6 +261,14 @@ test('visual plan rejects unsafe targets, unknown roles and external routes', (t
   assert.throws(() => validateVisualPlan(out), /application path/);
 });
 
+test('design contract accepts testid tables and rejects specs without testids', (t) => {
+  const out = fixture(t);
+  write(out, 'design/ui-spec.md', '## Binding test contract\n\n| testid | element |\n|---|---|\n| main-content | page |');
+  validateDesign(out);
+  write(out, 'design/ui-spec.md', '## Binding test contract\n\nNo selectors yet.');
+  assert.throws(() => validateDesign(out), /UI test contract is missing/);
+});
+
 test('missing mobile evidence and unresolved visual defects cannot pass', (t) => {
   const out = fixture(t);
   const paths = prepareEvidence(out);
