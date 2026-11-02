@@ -24,7 +24,7 @@ Write a `JOURNEY:` test for the complete `product.json.primary_journey`: enter t
 
 ### `e2e/edge-cases.spec.ts`
 
-Write 1–3 high-value `EDGE:` checks from actual requirements/risks: applicable invalid inputs, boundaries, empty results, permission/state conflicts or recovery. Use only categories this product has. Static content may verify a meaningful navigation/content/accessibility boundary; do not invent forms, filters, dates, transactions or role changes.
+Write 1–3 high-value `EDGE:` checks from actual requirements/risks: applicable invalid inputs, boundaries, empty results, permission/state conflicts or recovery. When the product holds exclusive resources or accepts start dates/times, prefer an overlapping-hold rejection and a past-start rejection, and pick test dates free of seeded holds. Use only categories this product has. Static content may verify a meaningful navigation/content/accessibility boundary; do not invent forms, filters, dates, transactions or role changes.
 
 ### `e2e/smoke.spec.ts`
 

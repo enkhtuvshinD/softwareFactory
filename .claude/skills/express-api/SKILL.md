@@ -43,6 +43,7 @@ The stack is fixed: Express 4, the `server/db.ts` JSON store, strict TypeScript,
 - The server computes derived values (totals, statuses, counters, timestamps) and ignores client-sent versions of them.
 - New ids are a prefix plus the next number (`bk-4`) computed from existing ids, never `Math.random()`, so tests and demo data stay predictable.
 - Status changes go through a transition table in `shared/` (`{ pending: ['confirmed', 'cancelled'] }`), with unit tests for allowed and rejected transitions.
+- Invariants other records can break, such as overlapping holds on one resource or capacity, are re-checked inside every mutation that creates or confirms a hold and return 409 with a domain code (`BOOKING_CONFLICT`). A transition table alone does not make an approval valid.
 
 ## Authorization (demo personas)
 
@@ -56,6 +57,7 @@ The stack is fixed: Express 4, the `server/db.ts` JSON store, strict TypeScript,
 - No `setInterval` jobs and no writes during GET requests. Derive time-based states (expired, overdue, started) at read time from stored timestamps and the current time.
 - Money math in integers, rounding once at the defined step: 3 days × 8500 + 2500 = 28000 cents → `$280.00`.
 - Day counts between date-only strings: parse each as UTC midnight with `Date.UTC` and divide by 86 400 000; never use local time.
+- "Today" and "now" for user-entered dates and times come from the local clock where the demo runs (local `Date` getters, never `toISOString().slice(0, 10)`): people enter local wall-clock values. Compare an entered date plus time against local now.
 - Send `Cache-Control: no-store` on `/api` so refreshed pages show current data.
 
 ## Verify

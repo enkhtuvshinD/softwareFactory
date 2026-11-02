@@ -16,7 +16,7 @@ The output is the existing Product and scope section and Assumptions of `require
 
 ## Assumptions and limitations
 
-- **Deferred:** ideas the brief marks as optional, later or nice-to-have, plus natural next steps excluded above. Name each briefly; specify and build none of them.
+- **Deferred:** ideas the brief marks as optional, later or nice-to-have, plus natural next steps excluded above. Name each briefly; specify and build none of them. Integrity rules the principal journey depends on are never deferred: one resource held twice at the same time, holds starting in the past, server-side permission checks.
 
 ## Check before writing
 
