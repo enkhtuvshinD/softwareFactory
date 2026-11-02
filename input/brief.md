@@ -1,4 +1,4 @@
-<!-- # Challenge Brief: "Wheels2Go" (P2P Mobility Marketplace — Car Only)
+# Challenge Brief: "Wheels2Go" (P2P Mobility Marketplace — Car Only)
 
 ## Objective
 
@@ -44,16 +44,16 @@ Booking & Reservation Flow (Renter & Owner):
 
 ## Testable Requirements Matrix for Judges
 
-| Module | Requirement | Test Action | Pass Criteria |
-|---|---|---|---|
-| TR-1: Car Listing Creation | Owners can list a new vehicle with all required specs and pickup location. | Create a listing: "Tesla Model Y 2023", $85/day, Location: "Airport Hub". | Listing appears instantly in the catalog feed with correct details and location badge. |
-| TR-2: Search & Filter Validation | Renters can filter inventory by make and maximum daily rate. | Filter catalog by Make = "Tesla" or set Max Daily Rate = $90. | Non-matching cars disappear from the active feed in real time. |
-| TR-3: Dynamic Pricing Math | Checkout flow calculates total cost accurately based on duration and fees. | Select a 3-day rental for an $85/day car with a $25 cleaning fee. | Checkout summary displays exactly $280.00 ($255 rental + $25 fee). |
-| TR-4: Owner Booking Approval | Owners can manage rental request states from their portal. | Log into Owner view, locate a pending booking request, and click "Approve". | Booking status updates to Confirmed across both owner and renter portals. |
+| Module                           | Requirement                                                                | Test Action                                                                 | Pass Criteria                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| TR-1: Car Listing Creation       | Owners can list a new vehicle with all required specs and pickup location. | Create a listing: "Tesla Model Y 2023", $85/day, Location: "Airport Hub".   | Listing appears instantly in the catalog feed with correct details and location badge. |
+| TR-2: Search & Filter Validation | Renters can filter inventory by make and maximum daily rate.               | Filter catalog by Make = "Tesla" or set Max Daily Rate = $90.               | Non-matching cars disappear from the active feed in real time.                         |
+| TR-3: Dynamic Pricing Math       | Checkout flow calculates total cost accurately based on duration and fees. | Select a 3-day rental for an $85/day car with a $25 cleaning fee.           | Checkout summary displays exactly $280.00 ($255 rental + $25 fee).                     |
+| TR-4: Owner Booking Approval     | Owners can manage rental request states from their portal.                 | Log into Owner view, locate a pending booking request, and click "Approve". | Booking status updates to Confirmed across both owner and renter portals.              |
 
 ## Seed Data
 
-The pre-populated seed dataset is provided separately as `seed.json` (users, cars, bookings). -->
+The pre-populated seed dataset is provided separately as `seed.json` (users, cars, bookings).
 
 //2
 
@@ -282,7 +282,7 @@ Deliver a working end-to-end car rental marketplace that demonstrates the AI Fac
 
 #3
 
-# Build QueueFlow — Smart Queue & Appointment Management Platform
+<!-- # Build QueueFlow — Smart Queue & Appointment Management Platform
 
 Build a fully functional, responsive web application called QueueFlow.
 
@@ -548,4 +548,4 @@ TR-6: Admin Analytics
 
 ## Final Objective
 
-Deliver a complete digital queue management platform demonstrating the AI Factory's ability to autonomously understand business workflows, generate requirements, design interfaces, implement application logic, maintain data consistency, and validate functionality through automated QA tests.
+Deliver a complete digital queue management platform demonstrating the AI Factory's ability to autonomously understand business workflows, generate requirements, design interfaces, implement application logic, maintain data consistency, and validate functionality through automated QA tests. -->

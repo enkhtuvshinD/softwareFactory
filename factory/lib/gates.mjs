@@ -10,6 +10,7 @@ const strings = (value) => Array.isArray(value) && value.every((item) => typeof 
 const text = (value) => typeof value === 'string' && value.trim().length > 0;
 const nonemptyStrings = (value) => strings(value) && value.length > 0 && value.every(text);
 const uniqueStrings = (value) => strings(value) && value.every(text) && new Set(value).size === value.length;
+const collapseWhitespace = (value) => value.replace(/\s+/g, ' ').trim();
 const safeId = /^[A-Za-z][A-Za-z0-9_-]{0,63}$/;
 
 export function validateProduct(out) {
@@ -35,6 +36,7 @@ export function validateAcceptance(out) {
   assert(Array.isArray(acceptance) && acceptance.length > 0, 'Acceptance cases are missing');
   const brief = fs.readFileSync(path.join(out, 'input/brief.md'), 'utf8');
   assert(text(brief), 'Product brief is empty');
+  const briefExcerpts = collapseWhitespace(brief);
   const ids = new Set();
   for (const item of acceptance) {
     assert(typeof item.id === 'string' && safeId.test(item.id) && !ids.has(item.id.toLowerCase()),
@@ -44,7 +46,7 @@ export function validateAcceptance(out) {
     assert([...product.roles, 'any', 'both'].includes(item.role), `${item.id}: invalid role for this product`);
     assert(item.source === (product.acceptance_mode === 'provided' ? 'brief' : 'derived'), `${item.id}: source contradicts acceptance mode`);
     assert(text(item.source_ref), `${item.id}: source reference is missing`);
-    if (item.source === 'brief') assert(brief.includes(item.source_ref.trim()), `${item.id}: source excerpt is absent from the current brief`);
+    if (item.source === 'brief') assert(briefExcerpts.includes(collapseWhitespace(item.source_ref)), `${item.id}: source excerpt is absent from the current brief`);
     for (const key of ['preconditions', 'steps', 'expected']) {
       assert(strings(item[key]) && item[key].every(text) && (key === 'preconditions' || item[key].length > 0), `${item.id}: invalid ${key}`);
     }

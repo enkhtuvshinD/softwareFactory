@@ -87,6 +87,22 @@ test('arbitrary explicit case IDs and domain roles preserve exact source excerpt
   assert.throws(() => validateAcceptance(out), /source excerpt is absent/);
 });
 
+test('source excerpts match briefs whose tables were padded by a formatter', (t) => {
+  const out = fixture(t, { provided: true });
+  write(out, 'input/brief.md', [
+    '| Module     | Pass Criteria              |',
+    '| ---------- | -------------------------- |',
+    '| CHECK_A    | Complete the primary task. |',
+    '| CHECK_B    | Show a useful error.       |',
+  ].join('\n'));
+  const cases = read(out, 'requirements/acceptance.json');
+  cases.forEach((item, index) => {
+    item.source_ref = index ? 'CHECK_B | Show a useful error.' : 'CHECK_A | Complete the primary task.';
+  });
+  write(out, 'requirements/acceptance.json', cases);
+  assert.equal(validateAcceptance(out).length, 2);
+});
+
 test('provided and derived checks cannot silently exchange provenance', (t) => {
   const out = fixture(t);
   const cases = read(out, 'requirements/acceptance.json');

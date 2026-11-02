@@ -1,0 +1,70 @@
+[
+  {
+    "id": "TR-1",
+    "title": "TR-1: Car Listing Creation",
+    "role": "owner",
+    "source": "brief",
+    "source_ref": "TR-1: Car Listing Creation | Owners can list a new vehicle with all required specs and pickup location. | Create a listing: \"Tesla Model Y 2023\", $85/day, Location: \"Airport Hub\". | Listing appears instantly in the catalog feed with correct details and location badge.",
+    "preconditions": ["Seed state; session is owner Sarah Jenkins (usr_101)"],
+    "steps": [
+      "Open the owner listings page and choose Add listing",
+      "Enter Make Tesla, Model Model Y, Year 2023, Fuel Electric, Transmission Automatic, Daily rate 85, Cleaning fee 25, a valid image URL, Location (pickup address) Airport Hub",
+      "Submit the form",
+      "Switch to renter and open the catalog"
+    ],
+    "expected": [
+      "The listing is saved without errors",
+      "The catalog shows a card titled Tesla Model Y 2023 with daily rate $85 and a location badge reading Airport Hub"
+    ]
+  },
+  {
+    "id": "TR-2",
+    "title": "TR-2: Search & Filter Validation",
+    "role": "renter",
+    "source": "brief",
+    "source_ref": "TR-2: Search & Filter Validation | Renters can filter inventory by make and maximum daily rate. | Filter catalog by Make = \"Tesla\" or set Max Daily Rate = $90. | Non-matching cars disappear from the active feed in real time.",
+    "preconditions": ["Seed state; session is renter Alex Rivera (usr_102)"],
+    "steps": [
+      "Open the catalog",
+      "Filter Make = Tesla",
+      "Clear the make filter, then set Max Daily Rate = 90"
+    ],
+    "expected": [
+      "With Make = Tesla only Tesla cars remain; Ford Bronco and BMW M3 disappear without a page reload",
+      "With Max Daily Rate = 90 only cars with a daily rate of $90 or less remain (Tesla Model Y at $85); Ford Bronco ($110) and BMW M3 ($140) disappear"
+    ]
+  },
+  {
+    "id": "TR-3",
+    "title": "TR-3: Dynamic Pricing Math",
+    "role": "renter",
+    "source": "brief",
+    "source_ref": "TR-3: Dynamic Pricing Math | Checkout flow calculates total cost accurately based on duration and fees. | Select a 3-day rental for an $85/day car with a $25 cleaning fee. | Checkout summary displays exactly $280.00 ($255 rental + $25 fee).",
+    "preconditions": ["Seed state; session is renter Alex Rivera; Tesla Model Y (car_01, $85/day, $25 fee)"],
+    "steps": [
+      "Open the Tesla Model Y details/checkout",
+      "Select a start date and an end date three days later that do not overlap Nov 10-13 2026 (for example 2026-11-20 to 2026-11-23)"
+    ],
+    "expected": [
+      "Breakdown shows 3 days, daily rate $85.00, rental subtotal $255.00, cleaning fee $25.00",
+      "Total displays exactly $280.00"
+    ]
+  },
+  {
+    "id": "TR-4",
+    "title": "TR-4: Owner Booking Approval",
+    "role": "both",
+    "source": "brief",
+    "source_ref": "TR-4: Owner Booking Approval | Owners can manage rental request states from their portal. | Log into Owner view, locate a pending booking request, and click \"Approve\". | Booking status updates to Confirmed across both owner and renter portals.",
+    "preconditions": ["Seed state; book_302 (Ford Bronco, 2026-11-20 to 2026-11-23, renter Alex Rivera) is Pending"],
+    "steps": [
+      "Switch to owner Sarah Jenkins and open Booking Requests",
+      "Locate the pending request for the Ford Bronco and click Approve",
+      "Switch to renter Alex Rivera and open My Bookings"
+    ],
+    "expected": [
+      "The request status in the owner portal changes to Confirmed",
+      "The same booking shows status Confirmed in the renter's My Bookings"
+    ]
+  }
+]
